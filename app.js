@@ -1,8 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+config();
+import morgan from "morgan";
 
-app = express();
+const app = express();
 
 app.use(express.json());
 
@@ -15,9 +18,11 @@ app.use(
 
 app.use(cookieParser()); //to let token in cookies parse
 
-app.use("./ping", (req, res) => {
+app.use(morgan("dev")); // dev level ki information console pe print karna
+
+app.use("/ping", (req, res) => {
     //to check if server is running
-    res.send("/pong");
+    res.send("Pong");
 });
 
 //routes in 3 modules
@@ -27,4 +32,4 @@ app.all("*", (req, res) => {
     res.status(404).send("OOPS!! 404 page not fount");
 });
 
-module.exports = app;
+export default app;
