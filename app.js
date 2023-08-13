@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 config();
 import morgan from "morgan";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/ping", (req, res) => {
 });
 
 //routes in 3 modules
+app.use("/api/V/user", userRoutes);
 
 app.all("*", (req, res) => {
     //if any random url is seraches expect defined ones
