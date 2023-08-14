@@ -1,5 +1,5 @@
-import User from "../models/userModel";
-import AppError from "../utilityFunctions/errorUtil";
+import User from "../models/userModel.js";
+import AppError from "../utilityFunctions/errorUtil.js";
 
 const cookieOptions = {
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -55,10 +55,61 @@ const register = async (req, res, next) => {
     });
 };
 
-const login = (req, res) => {};
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-const logout = (req, res) => {};
+        if (!email || !password) {
+            return next(new AppError("all fieds are required", 400));
+        }
 
-const getProfile = (req, res) => {};
+        const user = await User.findOne({ email }).select("+password");
+
+        if (!user || !user.comparePassword(password)) {
+            return next(new AppError("Email or password does not match", 400));
+        }
+
+        const token = await user.generateJWTToken();
+        user.password = undefined;
+
+        res.cookie("token", token, cookieOptions);
+
+        res.status(200).json({
+            success: true,
+            message: "User loggedin successfully",
+            user,
+        });
+    } catch (e) {
+        return next(new AppError(e.message, 500));
+    }
+};
+
+const logout = (req, res) => {
+    res.cookie("token", null, {
+        secure: true,
+        maxAge: 0, //optinal as token is alrady deleted with null
+        httpOnly: true,
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "User logged out successfully",
+    });
+};
+
+const getProfile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findById(userId);
+
+        res.status(200).json({
+            success: true,
+            message: "User details",
+            user,
+        });
+    } catch (e) {
+        return next(new AppError("Failed to fetch profile details", 500));
+    }
+};
 
 export { register, login, logout, getProfile }; //as mutiple we dont use default

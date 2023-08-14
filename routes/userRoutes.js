@@ -4,13 +4,14 @@ import {
     login,
     logout,
     register,
-} from "../controllers/userController";
+} from "../controllers/userController.js";
+import { isLoggedIn } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
 router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout); //url pe directly from brwoser we can logout
-router.post("/me", getProfile);
+router.post("/me", isLoggedIn, getProfile);
 
 export default router;

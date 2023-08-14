@@ -9,7 +9,7 @@ class AppError extends Error {
         this.statusCode = statusCode;
 
         //stackTrace - to know in which line the code breaked
-        Error.captureStackTrace(this, this.contructor);
+        Error.captureStackTrace(this, this.constructor);
         //this: Refers to the instance of the error that you're constructing. In this context, it's an instance of the AppError class.
 
         // this.constructor: Refers to the constructor function of the error instance. In your case, it's the constructor function of the AppError class.
