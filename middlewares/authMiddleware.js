@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 const isLoggedIn = async (req, res, next) => {
     //we are able to get info out of cookie because of cookie parser
     const { token } = req.cookies;
-
+    z;
     if (!token) {
         return next(new AppError("unauthenticated,please login again", 401));
     }

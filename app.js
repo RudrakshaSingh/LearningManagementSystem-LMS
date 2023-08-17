@@ -5,10 +5,13 @@ import { config } from "dotenv";
 config();
 import morgan from "morgan";
 import userRoutes from "./routes/userRoutes.js";
+import errorMiddleware from "./middlewares/errorMiddleware.js";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(express.urlencoded({ extended: true })); //for params to parse encoded url
 
 app.use(
     cors({
@@ -27,11 +30,13 @@ app.use("/ping", (req, res) => {
 });
 
 //routes in 3 modules
-app.use("/api/V/user", userRoutes);
+app.use("/api/v1/user", userRoutes);
 
 app.all("*", (req, res) => {
     //if any random url is seraches expect defined ones
     res.status(404).send("OOPS!! 404 page not fount");
 });
+
+app.use(errorMiddleware);
 
 export default app;
