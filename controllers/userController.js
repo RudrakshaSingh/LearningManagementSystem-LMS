@@ -8,7 +8,7 @@ import crypto from "crypto";
 const cookieOptions = {
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     httpOnly: true, //so you cannot do anything with js from client
-    secure: true,
+    // secure: true,
 };
 
 const register = async (req, res, next) => {
@@ -83,7 +83,7 @@ const register = async (req, res, next) => {
     });
 };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
@@ -93,7 +93,7 @@ const login = async (req, res) => {
 
         const user = await User.findOne({ email }).select("+password");
 
-        if (!user || !user.comparePassword(password)) {
+        if (!user || !(await user.comparePassword(password))) {
             return next(new AppError("Email or password does not match", 400));
         }
 
@@ -112,7 +112,7 @@ const login = async (req, res) => {
     }
 };
 
-const logout = (req, res) => {
+const logout = (req, res, next) => {
     res.cookie("token", null, {
         secure: true,
         maxAge: 0, //optinal as token is alrady deleted with null
@@ -133,7 +133,7 @@ const getProfile = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "User details",
-            user,
+            data: user,
         });
     } catch (e) {
         return next(new AppError("Failed to fetch profile details", 500));
@@ -212,21 +212,21 @@ const resetPassword = async (req, res) => {
     });
 };
 
-const changePassword = async (req, res) => {
-    const { oldPassord, newPassword } = req.body;
+const changePassword = async (req, res, next) => {
+    const { oldPassword, newPassword } = req.body;
     const { id } = req.user;
 
-    if (!oldPassord || !newPassword) {
+    if (!oldPassword || !newPassword) {
         return next(new AppError("all fields are mandatory", 400));
     }
 
-    const user = await user.findById(id).select("+password");
+    const user = await User.findById(id).select("+password");
 
     if (!user) {
         return next(new AppError("user does not exist", 400));
     }
 
-    const isPasswordValid = await user.comparePassword("oldPassword");
+    const isPasswordValid = await user.comparePassword(oldPassword);
 
     if (!isPasswordValid) {
         return next(new AppError("invalid old password", 400));
@@ -242,9 +242,9 @@ const changePassword = async (req, res) => {
         message: "password changed successfully",
     });
 };
-const updateUser = async () => {
+const updateUser = async (req, res, next) => {
     const { fullName } = req.body;
-    const { id } = req.user.id;
+    const { id } = req.user;
 
     const user = await User.findById(id);
 
@@ -252,36 +252,34 @@ const updateUser = async () => {
         return next(new AppError("user does not exist", 400));
     }
 
-    if (req.fullName) {
+    if (req.body.fullName) {
         user.fullName = fullName;
     }
 
     if (req.file) {
         await cloudinary.v2.uploader.destroy(user.avatar.public_id);
-    }
+        try {
+            const result = await cloudinary.v2.uploader.upload(req.file.path, {
+                folder: "lms",
+                width: 250,
+                height: 250,
+                gravity: "faces",
+                crop: "fill",
+            });
 
-    try {
-        const result = await cloudinary.v2.uploader.upload(req.file.path, {
-            folder: "lms",
-            width: 250,
-            height: 250,
-            gravity: "faces",
-            crop: "fill",
-        });
+            if (result) {
+                user.avatar.public_id = result.public_id;
+                user.avatar.secure_url = result.secure_url;
 
-        if (result) {
-            user.avatar.public_id = result.public_id;
-            user.avatar.secure_url = result.secure_url;
-
-            // Remove file from server
-            fs.rm(`uploads/${req.file.filename}`);
+                // Remove file from server
+                fs.rm(`uploads/${req.file.filename}`);
+            }
+        } catch (e) {
+            return next(
+                new AppError(e || "File not uploaded, please try again", 500)
+            );
         }
-    } catch (e) {
-        return next(
-            new AppError(e || "File not uploaded, please try again", 500)
-        );
     }
-
     await user.save();
     res.status(200).json({
         success: true,

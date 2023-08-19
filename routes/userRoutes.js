@@ -9,7 +9,7 @@ import {
     changePassword,
     updateUser,
 } from "../controllers/userController.js";
-import { isLoggedIn } from "../middlewares/authMiddleware.js";
+import isLoggedIn from "../middlewares/authMiddleware.js";
 import upload from "../middlewares/multerMiddleware.js";
 
 const router = Router();
