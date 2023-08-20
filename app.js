@@ -6,6 +6,7 @@ config();
 import morgan from "morgan";
 import userRoutes from "./routes/userRoutes.js";
 import errorMiddleware from "./middlewares/errorMiddleware.js";
+import courseRoutes from "./routes/courseRoutes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/ping", (req, res) => {
 
 //routes in 3 modules
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/courses", courseRoutes);
 
 app.all("*", (req, res) => {
     //if any random url is seraches expect defined ones
