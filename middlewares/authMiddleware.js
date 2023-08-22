@@ -30,4 +30,4 @@ const authorizedRoles =
         next();
     };
 
-export { isLoggedIn };
+export { isLoggedIn, authorizedRoles };

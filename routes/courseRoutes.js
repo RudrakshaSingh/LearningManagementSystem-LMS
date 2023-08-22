@@ -5,6 +5,7 @@ import {
     createCourse,
     updateCourse,
     removeCourse,
+    addLectureToCourseById,
 } from "../controllers/courseController.js";
 import { isLoggedIn } from "../middlewares/authMiddleware.js";
 import upload from "../middlewares/multerMiddleware.js";
@@ -15,11 +16,22 @@ const router = Router();
 router
     .route("/")
     .get(getAllCourses)
-    .post(isLoggedIn, upload.single("thumbnail"), createCourse); //multipart form data
+    .post(
+        isLoggedIn,
+        authorizedRoles("ADMIN"),
+        upload.single("thumbnail"),
+        createCourse
+    ); //multipart form data
 router
     .route("/:id")
     .get(isLoggedIn, getLecturesByCourseId)
-    .put(isLoggedIn, updateCourse)
-    .delete(isLoggedIn, removeCourse);
+    .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourse)
+    .delete(isLoggedIn, authorizedRoles("ADMIN"), removeCourse)
+    .post(
+        isLoggedIn,
+        authorizedRoles("ADMIN"),
+        upload.single("lecture"),
+        addLectureToCourseById
+    );
 
 export default router;
