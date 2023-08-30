@@ -7,7 +7,8 @@ import {
     removeCourse,
     addLectureToCourseById,
 } from "../controllers/courseController.js";
-import { isLoggedIn } from "../middlewares/authMiddleware.js";
+
+import { isLoggedIn, authorizedRoles } from "../middlewares/authMiddleware.js";
 import upload from "../middlewares/multerMiddleware.js";
 
 const router = Router();
