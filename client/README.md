@@ -1,49 +1,102 @@
-# LMS FRONTEND
+# LMS Frontend
 
-### setup instructions
+### Setup instruction
 
-1. clone the project
-   ...
-   https://github.com/RudrakshaSingh/pwLearningManagementSystem-LMS.git
-   ...
+1. Clone the project
 
-2. move into the directory
-   ...
-   cd client
-   ...
+```
+   git clone https://github.com/RudrakshaSingh/pwLearningManagementSystem-LMS.git
+```
 
-3. intall dependencies
-   ...
-   npm i
-   ...
+2. Move into the directory
+
+```client
+
+```
+
+3. install dependencies
+
+```
+    npm i
+```
 
 4. run the server
-   ...
-   npm run dev
-   ...
 
-### setup instructions for tailwind
+```
+    npm run dev
+```
 
-here=> https://tailwindcss.com/docs/installation
+### Setup instructions for tailwind
 
-1. intall tailwind
-   ...
-   npm install -D tailwindcss
-   ...
+[Tail wind official instruction doc](https://tailwindcss.com/docs/installation)
 
-2. create tailwind config file
-   ...
-   npx tailwindcss init
-   ...
+1. Install tailwindcss
 
-3. add file extensions to tailwind config file in content property
-   ...
-   "./src/\*_/_.{html,js,jsx,ts,tsx}"
-   ...
+```
+    npm install -D tailwindcss postcss autoprefixer
+```
 
-4. add the tailwind directives at the index.css files
-   ...
-   @tailwind base;
-   @tailwind components;
-   @tailwind utilities;
-   ...
+2. Create tailwind config file
+
+```
+    npx tailwindcss init
+```
+
+3. Add file extensions to tailwind config file in the contents property
+
+```
+    "./src/**/*.{html,js,jsx,ts,tsx}", "./index.html",
+
+```
+
+4. Add the tailwind directives at the top of the `index.css` file
+
+```
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+```
+
+5. Add the following details in the plugin property of tainwind config
+
+```
+    [require("daisyui"), require("@tailwindcss/line-clamp")]
+```
+
+### Adding plugins and dependencies
+
+```
+npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axi
+os react-hot-toast @tailwindcss/line-clamp
+```
+
+### Configure auto import sort esline
+
+1. Install simple import sore
+
+```
+    npm i -D eslint-plugin-simple-import-sort
+```
+
+2. Add rule in `.eslint.cjs`
+
+```
+    'simple-import-sort/imports': 'error'
+```
+
+3. add simple-import sort plugin in `.eslint.cjs`
+
+```
+    plugins: [..., 'simple-import-sort']
+```
+
+4. To enable auto import sort on file save in vscode
+
+    - Open `settings.json`
+    - add the following config
+
+```
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+```
