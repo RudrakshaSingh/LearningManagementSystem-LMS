@@ -7,6 +7,7 @@ import morgan from "morgan";
 import userRoutes from "./routes/userRoutes.js";
 import errorMiddleware from "./middlewares/errorMiddleware.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 const app = express();
 
@@ -33,12 +34,13 @@ app.use("/ping", (req, res) => {
 //routes in 3 modules
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/courses", courseRoutes);
+app.use("/api/v1/payments", paymentRoutes);
 
 app.all("*", (req, res) => {
     //if any random url is seraches expect defined ones
     res.status(404).send("OOPS!! 404 page not fount");
 });
 
-app.use(errorMiddleware);
+app.use(errorMiddleware); //after defining your routes and setting up other middleware
 
 export default app;
