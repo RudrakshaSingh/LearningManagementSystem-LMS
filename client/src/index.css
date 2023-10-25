@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* base css */
+/* base css ;  */
 body {
     margin: auto;
     max-width: 1440px;
     position: relative;
+    background-color: green;
 }
