@@ -1,4 +1,6 @@
-import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
+import { FaXTwitter } from "react-icons/fa6";
+
 function Footer() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -18,7 +20,7 @@ function Footer() {
                         <BsLinkedin />
                     </a>
                     <a className="hover:text-yellow-500 transition-all ease-in-out duration-300">
-                        <BsTwitter />
+                        <FaXTwitter />
                     </a>
                 </section>
             </footer>
