@@ -16,7 +16,6 @@ function AboutUs() {
                             knowledge to each other to empower and contribute in the growth and wellness of mankind.
                         </p>
                     </section>
-
                     <div className="w-1/2">
                         <img
                             id="test1"
@@ -44,5 +43,4 @@ function AboutUs() {
         </HomeLayout>
     );
 }
-
 export default AboutUs;
