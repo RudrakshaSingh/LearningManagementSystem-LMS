@@ -79,7 +79,7 @@ function Signup() {
         formData.append("password", signupData.password);
         formData.append("avatar", signupData.avatar);
 
-        // dispatch create account action
+        // dispatch create account action//we can use signup data directly instead of formdata
         const response = await dispatch(createAccount(formData));
         if (response?.payload?.success) navigate("/");
 
