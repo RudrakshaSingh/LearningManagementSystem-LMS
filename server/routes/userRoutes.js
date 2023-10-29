@@ -16,7 +16,7 @@ const router = Router();
 
 router.post("/register", upload.single("avatar"), register); //single file upload
 router.post("/login", login);
-router.get("/logout", logout); //url pe directly from brwoser we can logout
+router.post("/logout", logout); //url pe directly from brwoser we can logout
 router.get("/me", isLoggedIn, getProfile);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:resetToken", resetPassword);
