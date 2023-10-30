@@ -6,7 +6,7 @@ import cloudinary from "cloudinary";
 //you should use try catch everywhere you see await or any exception that can come
 const getAllCourses = async function (req, res, next) {
     try {
-        const courses = await Course.find({}).select("-lectures -description");
+        const courses = await Course.find({}).select("");
         res.status(200).json({
             success: true,
             message: "all courses",
@@ -56,9 +56,7 @@ const createCourse = async (req, res, next) => {
     });
 
     if (!course) {
-        return next(
-            new AppError("Course could not created, please try again", 500)
-        );
+        return next(new AppError("Course could not created, please try again", 500));
     }
 
     if (req.file) {
@@ -101,9 +99,7 @@ const updateCourse = async (req, res, next) => {
         );
 
         if (!course) {
-            return next(
-                new AppError("Course with given id does not exist", 500)
-            );
+            return next(new AppError("Course with given id does not exist", 500));
         }
 
         res.status(200).json({
@@ -122,9 +118,7 @@ const removeCourse = async (req, res, next) => {
         const course = await Course.findById(id);
 
         if (!course) {
-            return next(
-                new AppError("Course with given id does not exist", 500)
-            );
+            return next(new AppError("Course with given id does not exist", 500));
         }
 
         await Course.findByIdAndDelete(id);
@@ -150,9 +144,7 @@ const addLectureToCourseById = async (req, res, next) => {
         const course = await Course.findById(id);
 
         if (!course) {
-            return next(
-                new AppError("Course with given id does not exist", 500)
-            );
+            return next(new AppError("Course with given id does not exist", 500));
         }
 
         const lecutureData = {
@@ -163,12 +155,9 @@ const addLectureToCourseById = async (req, res, next) => {
 
         if (req.file) {
             try {
-                const result = await cloudinary.v2.uploader.upload(
-                    req.file.path,
-                    {
-                        folder: "lms",
-                    }
-                );
+                const result = await cloudinary.v2.uploader.upload(req.file.path, {
+                    folder: "lms",
+                });
                 if (result) {
                     lecutureData.lecture.public_id = result.public_id;
                     lecutureData.lecture.secure_url = result.secure_url;
@@ -197,11 +186,4 @@ const addLectureToCourseById = async (req, res, next) => {
     }
 };
 
-export {
-    getAllCourses,
-    getLecturesByCourseId,
-    createCourse,
-    updateCourse,
-    removeCourse,
-    addLectureToCourseById,
-};
+export { getAllCourses, getLecturesByCourseId, createCourse, updateCourse, removeCourse, addLectureToCourseById };

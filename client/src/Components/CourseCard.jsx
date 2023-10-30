@@ -5,12 +5,12 @@ function CourseCard({ data }) {
 
     return (
         <div
-            onClick={() => navigate("/course/description/")}
-            className="text-white w-[22rem] h-[430px] shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700"
+            onClick={() => navigate("/course/description/", { state: { ...data } })}
+            className="text-white w-[22rem] h-[430px] shadow-[0_0_50px_black] rounded-3xl cursor-pointer group overflow-hidden bg-zinc-800"
         >
-            <div className="overflow-hidden">
+            <div className="overflow-hidden flex-col items-center justify-center">
                 <img
-                    className="h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale=[1,2] transition-all ease-in-out diration-300"
+                    className="p-2 h-48 w-full rounded-3xl group-hover:scale=[1,2] transition-all ease-in-out diration-300"
                     src={data?.thumbnail?.secure_url}
                     alt="course thumbnail"
                 />
@@ -23,7 +23,7 @@ function CourseCard({ data }) {
                     </p>
                     <p className="font-semibold">
                         <span className="text-yellow-500 font-bold">Total lectures : </span>
-                        {data?.numberoflectures}
+                        {data?.numbersOfLectures}
                     </p>
                     <p className="font-semibold">
                         <span className="text-yellow-500 font-bold">Instructor : </span>

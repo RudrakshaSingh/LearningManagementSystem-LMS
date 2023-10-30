@@ -59,7 +59,7 @@ function Contact() {
                 <form
                     noValidate
                     onSubmit={onFormSubmit}
-                    className="flex flex-col items-center justify-center gap-2 p-5 rounded-md text-white shadow-[0_0_10px_black] w-[22rem]"
+                    className="flex flex-col items-center justify-center gap-2 p-5 rounded-3xl text-white shadow-[0_0_100px_black] w-[22rem]"
                 >
                     <h1 className="text-3xl font-semibold">Contact Form</h1>
 
@@ -68,7 +68,7 @@ function Contact() {
                             Name
                         </label>
                         <input
-                            className="bg-transparent border px-2 py-1 rounded-sm"
+                            className="bg-transparent border px-2 py-1 rounded-md"
                             id="name"
                             type="text"
                             name="name"
@@ -83,7 +83,7 @@ function Contact() {
                             Email
                         </label>
                         <input
-                            className="bg-transparent border px-2 py-1 rounded-sm"
+                            className="bg-transparent border px-2 py-1 rounded-md"
                             id="email"
                             type="email"
                             name="email"
@@ -98,7 +98,7 @@ function Contact() {
                             Message
                         </label>
                         <textarea
-                            className="bg-transparent border px-2 py-1 rounded-sm resize-none h-40"
+                            className="bg-transparent border px-2 py-1 rounded-md resize-none h-40"
                             id="message"
                             name="message"
                             placeholder="Enter your email"
@@ -108,7 +108,7 @@ function Contact() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-full py-2 font-semibold text-lg cursor-pointer"
                     >
                         Submit
                     </button>
