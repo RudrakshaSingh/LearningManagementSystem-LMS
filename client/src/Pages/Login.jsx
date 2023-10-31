@@ -46,7 +46,7 @@ function Login() {
                 <form
                     noValidate
                     onSubmit={onLogin}
-                    className="flex flex-col justify-center gap-3 rounded-[40px] p-4 text-white w-96 shadow-[0_0_100px_black]"
+                    className="flex flex-col justify-center gap-3 rounded-[40px] p-4 text-white w-96 shadow-[10px_10px_150px_gray]"
                 >
                     <h1 className="text-center text-2xl font-bold">Login Page</h1>
                     <div className="flex flex-col gap-1">

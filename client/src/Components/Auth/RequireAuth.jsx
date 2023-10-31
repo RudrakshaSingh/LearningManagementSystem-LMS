@@ -7,9 +7,9 @@ function RequireAuth({ allowedRoles }) {
     return isLoggedIn && allowedRoles.find((myRole) => myRole == role) ? (
         <Outlet /> //renders child component in app.jsx
     ) : isLoggedIn ? (
-        <Navigate to="/denied" />
+        <Navigate to="/denied" /> //loggedin but not allowed role
     ) : (
-        <Navigate to="login" />
+        <Navigate to="login" /> // not loggedin as well as not allowed role
     );
 }
 
