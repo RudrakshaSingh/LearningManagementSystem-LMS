@@ -1,3 +1,7 @@
+import crypto from "crypto";
+
+import asyncHandler from "../middlewares/asyncHandlerMiddleware.js";
+
 import Payment from "../models/paymentModel.js";
 import User from "../models/userModel.js";
 import { razorpay } from "../server.js";
@@ -9,7 +13,7 @@ import AppError from "../utilityFunctions/errorUtil.js";
  * @ROUTE @POST {{URL}}/api/v1/payments/subscribe
  * @ACCESS Private (Logged in user only)
  */
-export const buySubscription = async (req, res, next) => {
+export const buySubscription = asyncHandler(async (req, res, next) => {
     // Extracting ID from request obj
     const { id } = req.user;
 
@@ -35,6 +39,7 @@ export const buySubscription = async (req, res, next) => {
     // Adding the ID and the status to the user account
     user.subscription.id = subscription.id;
     user.subscription.status = subscription.status;
+    console.log("dl", subscription.status);
 
     // Saving the user object
     await user.save();
@@ -44,14 +49,14 @@ export const buySubscription = async (req, res, next) => {
         message: "subscribed successfully",
         subscription_id: subscription.id,
     });
-};
+});
 
 /**
  * @VERIFY_SUBSCRIPTION
  * @ROUTE @POST {{URL}}/api/v1/payments/verify
  * @ACCESS Private (Logged in user only)
  */
-export const verifySubscription = async (req, res, next) => {
+export const verifySubscription = asyncHandler(async (req, res, next) => {
     const { id } = req.user;
     const { razorpay_payment_id, razorpay_subscription_id, razorpay_signature } = req.body;
 
@@ -92,14 +97,14 @@ export const verifySubscription = async (req, res, next) => {
         success: true,
         message: "Payment verified successfully",
     });
-};
+});
 
 /**
  * @CANCEL_SUBSCRIPTION
  * @ROUTE @POST {{URL}}/api/v1/payments/unsubscribe
  * @ACCESS Private (Logged in user only)
  */
-export const cancelSubscription = async (req, res, next) => {
+export const cancelSubscription = asyncHandler(async (req, res, next) => {
     const { id } = req.user;
 
     // Finding the user
@@ -161,27 +166,27 @@ export const cancelSubscription = async (req, res, next) => {
         success: true,
         message: "Subscription canceled successfully",
     });
-};
+});
 
 /**
  * @GET_RAZORPAY_ID
  * @ROUTE @POST {{URL}}/api/v1/payments/razorpay-key
  * @ACCESS Public
  */
-export const getRazorpayApiKey = async (_req, res, _next) => {
+export const getRazorpayApiKey = asyncHandler(async (_req, res, _next) => {
     res.status(200).json({
         success: true,
         message: "Razorpay API key",
         key: process.env.RAZORPAY_KEY_ID,
     });
-};
+});
 
 /**
  * @GET_RAZORPAY_ID
  * @ROUTE @GET {{URL}}/api/v1/payments
  * @ACCESS Private (ADMIN only)
  */
-export const allPayments = async (req, res, _next) => {
+export const allPayments = asyncHandler(async (req, res, _next) => {
     const { count, skip } = req.query;
 
     // Find all subscriptions from razorpay
@@ -248,4 +253,4 @@ export const allPayments = async (req, res, _next) => {
         finalMonths,
         monthlySalesRecord,
     });
-};
+});
