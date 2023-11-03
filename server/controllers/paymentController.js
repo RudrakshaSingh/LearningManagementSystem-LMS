@@ -89,10 +89,8 @@ export const verifySubscription = asyncHandler(async (req, res, next) => {
 
     // Update the user subscription status to active (This will be created before this)
     user.subscription.status = "active";
-
     // Save the user in the DB with any changes
-    await user.save();
-
+    const u = await user.save();
     res.status(200).json({
         success: true,
         message: "Payment verified successfully",
@@ -105,6 +103,7 @@ export const verifySubscription = asyncHandler(async (req, res, next) => {
  * @ACCESS Private (Logged in user only)
  */
 export const cancelSubscription = asyncHandler(async (req, res, next) => {
+    console.log("suck");
     const { id } = req.user;
 
     // Finding the user
@@ -138,7 +137,6 @@ export const cancelSubscription = asyncHandler(async (req, res, next) => {
     const payment = await Payment.findOne({
         razorpay_subscription_id: subscriptionId,
     });
-
     // Getting the time from the date of successful payment (in milliseconds)
     const timeSinceSubscribed = Date.now() - payment.createdAt;
 
@@ -159,7 +157,7 @@ export const cancelSubscription = asyncHandler(async (req, res, next) => {
     user.subscription.status = undefined; // Change the subscription Status in user DB
 
     await user.save();
-    await payment.remove();
+    await payment.deleteOne();
 
     // Send the response
     res.status(200).json({

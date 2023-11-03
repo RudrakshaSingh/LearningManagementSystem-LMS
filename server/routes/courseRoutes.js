@@ -1,11 +1,12 @@
 import { Router } from "express";
 import {
+    addLectureToCourseById,
+    createCourse,
+    deleteCourseById,
     getAllCourses,
     getLecturesByCourseId,
-    createCourse,
-    updateCourse,
-    removeCourse,
-    addLectureToCourseById,
+    removeLectureFromCourse,
+    updateCourseById,
 } from "../controllers/courseController.js";
 
 import { isLoggedIn, authorizedRoles, authorizedSubscriber } from "../middlewares/authMiddleware.js";
@@ -17,12 +18,13 @@ const router = Router();
 router
     .route("/")
     .get(getAllCourses)
-    .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("thumbnail"), createCourse); //multipart form data
+    .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("thumbnail"), createCourse)
+    .delete(isLoggedIn, authorizedRoles("ADMIN"), removeLectureFromCourse);
+
 router
     .route("/:id")
-    .get(isLoggedIn, authorizedSubscriber, getLecturesByCourseId)
-    .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourse)
-    .delete(isLoggedIn, authorizedRoles("ADMIN"), removeCourse)
-    .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("lecture"), addLectureToCourseById);
+    .get(isLoggedIn, authorizedSubscriber, getLecturesByCourseId) // Added authorizeSubscribers to check if user is admin or subscribed if not then forbid the access to the lectures
+    .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("lecture"), addLectureToCourseById)
+    .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourseById);
 
 export default router;
