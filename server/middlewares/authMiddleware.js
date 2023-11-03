@@ -1,5 +1,7 @@
+import User from "../models/userModel.js";
 import AppError from "../utilityFunctions/errorUtil.js";
 import jwt from "jsonwebtoken";
+import asyncHandler from "./asyncHandlerMiddleware.js";
 
 const isLoggedIn = async (req, res, next) => {
     const { token } = req.cookies;
@@ -24,12 +26,11 @@ const authorizedRoles =
         }
         next();
     };
-const authorizedSubscriber = async (req, res, next) => {
-    const subscription = re.user.subscription;
-    const currentUserRole = req.user.role;
-    if (currentUserRole !== "ADMIN" && subscription.status !== "active") {
+const authorizedSubscriber = asyncHandler(async (req, res, next) => {
+    const user = User.findById(req.user.id);
+    if (user.role !== "ADMIN" && user.subscription.status !== "active") {
         return next(new AppError("please subscribe to access this route!", 400));
     }
-};
+});
 
 export { isLoggedIn, authorizedRoles, authorizedSubscriber };
