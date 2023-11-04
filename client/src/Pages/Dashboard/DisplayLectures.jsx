@@ -15,13 +15,11 @@ function DisplayLectures() {
     const [currentVideo, setCurrentVideo] = useState(0);
 
     async function onLectureDelete(courseId, lectureId) {
-        console.log(courseId, lectureId);
         await dispatch(deleteCourseLecture({ courseId: courseId, lectureId: lectureId }));
         await dispatch(getCourseLectures(courseId));
     }
 
     useEffect(() => {
-        console.log(state);
         if (!state) navigate("/courses");
         dispatch(getCourseLectures(state._id));
     }, []);
@@ -35,10 +33,10 @@ function DisplayLectures() {
                 {lectures && lectures.length > 0 ? (
                     <div className="flex justify-center gap-10 w-full">
                         {/* left section for playing videos and displaying course details to admin */}
-                        <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black]">
+                        <div className="overflow-y-auto space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black]">
                             <video
                                 src={lectures && lectures[currentVideo]?.lecture?.secure_url}
-                                className="object-fill rounded-tl-lg rounded-tr-lg w-full"
+                                className="object-contain rounded-tl-lg rounded-tr-lg w-full max-h-96"
                                 controls
                                 disablePictureInPicture
                                 muted
@@ -57,7 +55,7 @@ function DisplayLectures() {
                         </div>
 
                         {/* right section for displaying list of lectres */}
-                        <ul className="w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-4">
+                        <ul className="overflow-y-auto w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-4">
                             <li className="font-semibold text-xl text-yellow-500 flex items-center justify-between">
                                 <p>Lectures list</p>
                                 {role === "ADMIN" && (

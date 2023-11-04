@@ -39,7 +39,6 @@ export const buySubscription = asyncHandler(async (req, res, next) => {
     // Adding the ID and the status to the user account
     user.subscription.id = subscription.id;
     user.subscription.status = subscription.status;
-    console.log("dl", subscription.status);
 
     // Saving the user object
     await user.save();
@@ -103,7 +102,6 @@ export const verifySubscription = asyncHandler(async (req, res, next) => {
  * @ACCESS Private (Logged in user only)
  */
 export const cancelSubscription = asyncHandler(async (req, res, next) => {
-    console.log("suck");
     const { id } = req.user;
 
     // Finding the user

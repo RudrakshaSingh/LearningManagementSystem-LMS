@@ -23,7 +23,6 @@ export const contactUs = asyncHandler(async (req, res, next) => {
         // Await the send email
         await sendEmail(process.env.CONTACT_US_EMAIL, subject, textMessage);
     } catch (error) {
-        console.log(error);
         return next(new AppError(error.message, 400));
     }
 
