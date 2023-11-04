@@ -38,6 +38,10 @@ export const createCourse = asyncHandler(async (req, res, next) => {
         description,
         category,
         createdBy,
+        thumbnail: {
+            public_id: "Dummy",
+            secure_url: "Dummy",
+        },
     });
 
     if (!course) {
@@ -50,7 +54,7 @@ export const createCourse = asyncHandler(async (req, res, next) => {
             const result = await cloudinary.v2.uploader.upload(req.file.path, {
                 folder: "lms", // Save files in a folder named lms
             });
-
+            console.log(result);
             // If success
             if (result) {
                 // Set the public_id and secure_url in array

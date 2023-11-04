@@ -31,7 +31,7 @@ export const createNewCourse = createAsyncThunk("/course/create", async (data) =
         formData.append("category", data?.category);
         formData.append("createdBy", data?.createdBy);
         formData.append("thumbnail", data?.thumbnail);
-
+        console.log("form data", formData);
         const response = axiosInstance.post("/courses", formData);
         toast.promise(response, {
             loading: "Creating new course",
