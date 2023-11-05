@@ -15,19 +15,21 @@ function CourseCard({ data }) {
                     alt="course thumbnail"
                 />
                 <div className="p-3 space-y-1 text-white">
-                    <h2 className="text-xl font-bold text-yellow-500 line-clamp-2">{data?.title}</h2>
-                    <p className="line-clamp-2">{data?.description}</p>
+                    <h2 className="text-xl font-bold text-gray-500 line-clamp-2">Title : {data?.title}</h2>
+                    <p className="font-semibold">
+                        <span className="text-yellow-500 font-bold">Instructor : </span>
+                        {data?.createdBy}
+                    </p>
                     <p className="font-semibold">
                         <span className="text-yellow-500 font-bold">Category : </span>
                         {data?.category}
                     </p>
+                    <p className="line-clamp-2">
+                        <span className="text-yellow-500 font-bold">Description : </span> {data?.description}
+                    </p>
                     <p className="font-semibold">
                         <span className="text-yellow-500 font-bold">Total lectures : </span>
                         {data?.numbersOfLectures}
-                    </p>
-                    <p className="font-semibold">
-                        <span className="text-yellow-500 font-bold">Instructor : </span>
-                        {data?.createdBy}
                     </p>
                 </div>
             </div>

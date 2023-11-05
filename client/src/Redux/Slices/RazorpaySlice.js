@@ -56,7 +56,6 @@ export const getPaymentRecord = createAsyncThunk("/payments/record", async () =>
 
             error: "Failed to get payment records",
         });
-
         return (await response).data;
     } catch (error) {
         toast.error("Operation failed");

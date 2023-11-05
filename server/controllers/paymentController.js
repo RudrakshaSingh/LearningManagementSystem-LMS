@@ -187,6 +187,7 @@ export const allPayments = asyncHandler(async (req, res, _next) => {
 
     // Find all subscriptions from razorpay
     const allPayments = await razorpay.subscriptions.all({
+        plan_id: process.env.RAZORPAY_PLAN_ID,
         count: count ? count : 10, // If count is sent then use that else default to 10
         skip: skip ? skip : 0, // // If skip is sent then use that else default to 0
     });
@@ -241,7 +242,6 @@ export const allPayments = asyncHandler(async (req, res, _next) => {
     Object.keys(finalMonths).forEach((monthName) => {
         monthlySalesRecord.push(finalMonths[monthName]);
     });
-
     res.status(200).json({
         success: true,
         message: "All payments",

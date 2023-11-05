@@ -25,6 +25,7 @@ router
     .route("/:id")
     .get(isLoggedIn, authorizedSubscriber, getLecturesByCourseId) // Added authorizeSubscribers to check if user is admin or subscribed if not then forbid the access to the lectures
     .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("lecture"), addLectureToCourseById)
-    .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourseById);
+    .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourseById)
+    .delete(isLoggedIn, authorizedRoles("ADMIN"), deleteCourseById);
 
 export default router;
