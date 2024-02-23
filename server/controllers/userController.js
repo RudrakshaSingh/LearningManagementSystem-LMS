@@ -6,7 +6,7 @@ import cloudinary from "cloudinary";
 import asyncHandler from "../middlewares/asyncHandlerMiddleware.js";
 import AppError from "../utilityFunctions/errorUtil.js";
 import User from "../models/userModel.js";
-import sendEmail from "../utilityFunctions/errorUtil.js";
+import sendEmail from "../utilityFunctions/sendEmail.js"; //was wrong
 
 const cookieOptions = {
     secure: process.env.NODE_ENV === "production" ? true : false,

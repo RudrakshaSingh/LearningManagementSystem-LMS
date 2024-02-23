@@ -7,9 +7,7 @@ const connectionToDb = async () => {
         const {
             connection,
         } = //connect in async fashion
-            await mongoose.connect(
-                process.env.MONGO_URI || "mongodb://127.0.0.1:27017/LMS"
-            );
+            await mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/LMS");
 
         if (connection) {
             console.log(`connected to mongodb:${connection.host}`);
