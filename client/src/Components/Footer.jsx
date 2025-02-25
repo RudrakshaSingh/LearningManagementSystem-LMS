@@ -1,31 +1,38 @@
-import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
-import { FaXTwitter } from "react-icons/fa6";
+
+import { Link } from 'react-router-dom';
 
 function Footer() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
 
-    return (
-        <>
-            <footer className="relative left-0 bottom-0 h-[10vh] py-5 flex flex-col sm:flex-row items-center justify-between text-white bg-gray-800 sm:px-20 ">
-                <section className="text-lg">Copyright {year} | All rights reserved</section>
-                <section className="flex items-center justify-center gap-5 text-2xl text-white">
-                    <a className="hover:text-yellow-500 transition-all ease-in-out duration-300">
-                        <BsFacebook />
-                    </a>
-                    <a className="hover:text-yellow-500 transition-all ease-in-out duration-300">
-                        <BsInstagram />
-                    </a>
-                    <a className="hover:text-yellow-500 transition-all ease-in-out duration-300">
-                        <BsLinkedin />
-                    </a>
-                    <a className="hover:text-yellow-500 transition-all ease-in-out duration-300">
-                        <FaXTwitter />
-                    </a>
-                </section>
-            </footer>
-        </>
-    );
+  return (
+    <footer className="relative left-0 bottom-0 min-h-[10vh] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <div className="container mx-auto px-6 pt-4">
+        
+
+        <div className="border-t border-gray-700/50 ">
+          <p className="text-sm text-gray-400 mb-4 text-center font-medium">
+            © {year} LMS Rides. All rights reserved.
+          </p>
+          <div className="flex justify-center items-center space-x-6 text-sm">
+            <Link 
+              to="/privacy" 
+              className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 hover:underline underline-offset-4"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-gray-600">•</span>
+            <Link 
+              to="/terms" 
+              className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 hover:underline underline-offset-4"
+            >
+              Terms of Service
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
 
 export default Footer;
