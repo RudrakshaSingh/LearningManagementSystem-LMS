@@ -157,7 +157,7 @@ function AboutUs() {
 							Join thousands who&apos;ve transformed their careers through our platform
 						</p>
 						<Link
-							to="/"
+							to="/login"
 							className="bg-gray-900 hover:bg-gray-800 text-amber-400 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-gray-900/30">
 							Get Started Now
 						</Link>

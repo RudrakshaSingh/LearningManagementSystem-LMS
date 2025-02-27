@@ -48,7 +48,7 @@ function HomeLayout({ children }) {
                         <FiMenu 
                             onClick={changeWidth} 
                             size={"32px"} 
-                            className="font-bold text-purple-600 hover:text-purple-700 m-4 transition-colors duration-200" 
+                            className="font-bold text-white m-4 " 
                         />
                     </label>
                 </div>
