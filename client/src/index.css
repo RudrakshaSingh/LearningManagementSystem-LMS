@@ -20,7 +20,7 @@ body {
   margin: auto;
   max-width: 1440px;
   position: relative;
-  @apply bg-gradient-to-br  from-purple-50 to-blue-50;
+  background: linear-gradient(to bottom right, #b7afbf, #686c6e);
   background-size: 400% 400%;
   animation: gradient-animation 15s ease infinite;
 }
