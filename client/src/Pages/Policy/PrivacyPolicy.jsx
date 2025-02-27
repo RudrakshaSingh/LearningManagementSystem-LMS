@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowLeft, CheckCircle, Info, KeyRound, Shield, Lock, UserCheck } from "lucide-react";
+import { AlertTriangle, ArrowLeft, CheckCircle, Info, KeyRound, Lock, Shield, UserCheck } from "lucide-react";
 import { useEffect } from "react";
 
 function PrivacyPolicy() {

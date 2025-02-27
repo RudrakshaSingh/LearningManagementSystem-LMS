@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowLeft, CheckCircle, Info, ShieldCheck, BookOpen, Scale, UserCheck, FileCheck } from "lucide-react";
+import { AlertTriangle, ArrowLeft, BookOpen, FileCheck,Info, Scale, ShieldCheck, UserCheck } from "lucide-react";
 import { useEffect } from "react";
 
 function TermsofService() {
