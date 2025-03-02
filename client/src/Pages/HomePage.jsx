@@ -56,15 +56,15 @@ function HomePage() {
 						</p>
 
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
-							<button className="group relative bg-amber-500 hover:bg-amber-600 text-gray-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/30 flex items-center gap-2">
+							<Link to="/courses" className="group relative bg-amber-500 hover:bg-amber-600 text-gray-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/30 flex items-center gap-2">
 								Explore Courses
 								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
 								<span className="absolute -inset-0.5 bg-amber-500/30 blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-							</button>
-							<button className="group relative border-2 border-amber-500 text-amber-500 hover:bg-amber-500/10 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/20">
+							</Link>
+							<Link to="/contact" className="group relative border-2 border-amber-500 text-amber-500 hover:bg-amber-500/10 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/20">
 								Contact Us
 								<span className="absolute -inset-0.5 bg-amber-500/10 blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-							</button>
+							</Link>
 						</div>
 
 						<div className="flex items-center justify-center lg:justify-start gap-4 mt-8 pt-4">

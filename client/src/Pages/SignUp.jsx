@@ -30,8 +30,7 @@ function Signup() {
     }
 
     function getImage(event) {
-        event.preventDefault(); // used with events like form submissions or anchor tag clicks to prevent the default action of navigating to a new page or performing a form submission.
-        // getting the image
+        event.preventDefault();
         const uploadedImage = event.target.files[0];
 
         if (uploadedImage) {
@@ -54,19 +53,16 @@ function Signup() {
             return;
         }
 
-        // checking name field length
         if (signupData.fullName.length < 5) {
-            toast.error("Name should be atleast of 5 characters");
+            toast.error("Name should be at least of 5 characters");
             return;
         }
-        // checking valid email
         if (!isEmail(signupData.email)) {
             toast.error("Invalid email id");
             return;
         }
-        // checking password validation
         if (!isValidPassword(signupData.password)) {
-            toast.error("Password should be 6 - 16 character long with atleast a number and special character");
+            toast.error("Password should be 6 - 16 character long with at least a number and special character");
             return;
         }
 
@@ -76,7 +72,6 @@ function Signup() {
         formData.append("password", signupData.password);
         formData.append("avatar", signupData.avatar);
 
-        // dispatch create account action//we can use signup data directly instead of formdata
         const response = await dispatch(createAccount(formData));
         if (response?.payload?.success) navigate("/");
 
@@ -91,19 +86,23 @@ function Signup() {
 
     return (
         <HomeLayout>
-            <div className="flex overflow-x-auto items-center justify-center h-[100vh]">
+            <div className="flex items-center justify-center min-h-screen bg-gray-900">
                 <form
-                    noValidate // it is stopping default html validation for toast
+                    noValidate
                     onSubmit={createNewAccount}
-                    className="bg-gray-800 flex flex-col justify-center gap-3 rounded-[40px] p-4 text-white w-96 shadow-[10px_10px_150px_gray]"
+                    className="bg-gray-800 flex flex-col justify-center gap-6 rounded-2xl p-10 text-gray-200 w-full max-w-md shadow-2xl"
                 >
-                    <h1 className="text-center text-2xl font-bold">Registration Page</h1>
+                    <h1 className="text-center text-3xl font-bold text-indigo-400">Create Account</h1>
 
-                    <label htmlFor="image_uploads" className="cursor-pointer">
+                    <label htmlFor="image_uploads" className="cursor-pointer flex items-center justify-center">
                         {previewImage ? (
-                            <img className="w-24 h-24 rounded-full m-auto" src={previewImage} />
+                            <img
+                                className="w-24 h-24 rounded-full border-2 border-indigo-400"
+                                src={previewImage}
+                                alt="avatar preview"
+                            />
                         ) : (
-                            <BsPersonCircle className="w-24 h-24 rounded-full m-auto" />
+                            <BsPersonCircle className="w-24 h-24 text-indigo-400" />
                         )}
                     </label>
                     <input
@@ -114,8 +113,8 @@ function Signup() {
                         id="image_uploads"
                         accept=".jpg, .jpeg, .png, .svg"
                     />
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="fullName" className="font-semibold">
+                    <div className="flex flex-col">
+                        <label htmlFor="fullName" className="font-semibold text-lg">
                             Name
                         </label>
                         <input
@@ -123,14 +122,14 @@ function Signup() {
                             required
                             name="fullName"
                             id="fullName"
-                            placeholder="Enter your name.."
-                            className="bg-transparent px-2 py-1 border rounded-md"
+                            placeholder="Enter your name..."
+                            className="bg-gray-700 border border-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             onChange={handleUserInput}
                             value={signupData.fullName}
                         />
                     </div>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="email" className="font-semibold">
+                    <div className="flex flex-col">
+                        <label htmlFor="email" className="font-semibold text-lg">
                             Email
                         </label>
                         <input
@@ -138,14 +137,14 @@ function Signup() {
                             required
                             name="email"
                             id="email"
-                            placeholder="Enter your email.."
-                            className="bg-transparent px-2 py-1 border rounded-md"
+                            placeholder="Enter your email..."
+                            className="bg-gray-700 border border-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             onChange={handleUserInput}
                             value={signupData.email}
                         />
                     </div>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="password" className="font-semibold">
+                    <div className="flex flex-col">
+                        <label htmlFor="password" className="font-semibold text-lg">
                             Password
                         </label>
                         <input
@@ -153,8 +152,8 @@ function Signup() {
                             required
                             name="password"
                             id="password"
-                            placeholder="Enter your password.."
-                            className="bg-transparent px-2 py-1 border rounded-md"
+                            placeholder="Enter your password..."
+                            className="bg-gray-700 border border-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             onChange={handleUserInput}
                             value={signupData.password}
                         />
@@ -162,15 +161,14 @@ function Signup() {
 
                     <button
                         type="submit"
-                        className="mt-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-full py-2 font-semibold text-lg cursor-pointer"
+                        className="mt-4 bg-indigo-500 hover:bg-indigo-600 transition-all duration-300 rounded-full py-3 font-semibold text-xl text-white"
                     >
-                        Create account
+                        Create Account
                     </button>
 
-                    <p className="text-center">
-                        Already have an account ?{" "}
-                        <Link to="/login" className="link text-accent cursor-pointer">
-                            {" "}
+                    <p className="text-center text-sm">
+                        Already have an account?{" "}
+                        <Link to="/login" className="text-indigo-400 hover:underline">
                             Login
                         </Link>
                     </p>

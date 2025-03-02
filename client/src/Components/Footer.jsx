@@ -16,7 +16,7 @@ function Footer() {
   const year = currentDate.getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-indigo-900 to-purple-900 border-t border-indigo-800/50">
+    <footer className="bg-gradient-to-r bg-gray-900 border-t border-indigo-800/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Company Info */}

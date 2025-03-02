@@ -42,55 +42,64 @@ function Login() {
 
     return (
         <HomeLayout>
-            <div className="flex overflow-x-auto items-center justify-center h-[100vh]">
+            <div className="flex items-center justify-center min-h-[calc(100vh-80px)] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
                 <form
                     noValidate
                     onSubmit={onLogin}
-                    className="flex flex-col justify-center gap-3 rounded-[40px] p-4 text-white w-96 shadow-[10px_10px_150px_gray]"
+                    className="flex flex-col justify-center gap-6 rounded-3xl p-8 w-full max-w-md bg-gray-800 border border-gray-700 shadow-[0_0_30px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)]"
                 >
-                    <h1 className="text-center text-2xl font-bold">Login Page</h1>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="email" className="font-semibold">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            required
-                            name="email"
-                            id="email"
-                            placeholder="Enter your email.."
-                            className="bg-transparent px-2 py-1 border rounded-md"
-                            onChange={handleUserInput}
-                            value={loginData.email}
-                        />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="password" className="font-semibold">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            required
-                            name="password"
-                            id="password"
-                            placeholder="Enter your password.."
-                            className="bg-transparent px-2 py-1 border rounded-md"
-                            onChange={handleUserInput}
-                            value={loginData.password}
-                        />
+                    <h1 className="text-center text-3xl font-bold text-indigo-400">
+                        Welcome Back!
+                    </h1>
+                    
+                    <div className="space-y-4">
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="email" className="font-medium text-gray-200">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                required
+                                name="email"
+                                id="email"
+                                placeholder="john@example.com"
+                                className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500 text-white placeholder-gray-400 transition-all"
+                                onChange={handleUserInput}
+                                value={loginData.email}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="password" className="font-medium text-gray-200">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                required
+                                name="password"
+                                id="password"
+                                placeholder="••••••••"
+                                className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500 text-white placeholder-gray-400 transition-all"
+                                onChange={handleUserInput}
+                                value={loginData.password}
+                            />
+                        </div>
                     </div>
 
                     <button
                         type="submit"
-                        className="mt-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-full py-2 font-semibold text-lg cursor-pointer"
+                        className="mt-4 bg-indigo-500 hover:bg-indigo-600 transition-all duration-300 rounded-full py-3 font-semibold text-xl text-white"
                     >
-                        Login
+                        Sign In
                     </button>
 
-                    <p className="text-center">
-                        Do not hanv an account ?
-                        <Link to="/signup" className="link text-accent cursor-pointer">
-                            Signup
+                    <p className="text-center text-gray-300 mt-6">
+                        Don&apos;t have an account? {" "}
+                        <Link 
+                            to="/signup" 
+                            className="text-indigo-500 hover:underline hover:text-indigo-400 font-medium  transition-colors"
+                        >
+                            Create account
                         </Link>
                     </p>
                 </form>
