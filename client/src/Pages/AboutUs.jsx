@@ -15,7 +15,7 @@ function AboutUs() {
 		<HomeLayout>
 			<div className="relative overflow-hidden">
 				{/* Hero Section */}
-				<section className="pt-20 pb-24 bg-gradient-to-br from-purple-900 via-blue-900 to-purple-800">
+				<section className="pt-20 pb-24 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800">
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
 						<div className="space-y-8 text-center lg:text-left">
 							<h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">

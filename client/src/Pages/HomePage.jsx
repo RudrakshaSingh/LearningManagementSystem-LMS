@@ -34,45 +34,50 @@ function HomePage() {
 
 	return (
 		<HomeLayout>
-			<div className="min-h-screen bg-gray-950 text-white">
+			<div className="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 text-white">
 				{/* Hero Section */}
 				<div className="pt-10 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-[90vh]">
 					{/* Text Section */}
 					<div className="lg:w-1/2 space-y-6 order-2 lg:order-1 text-center lg:text-left">
 						<div className="mb-8 relative">
 							<div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl -z-10" />
-							<span className="text-amber-400 font-bold text-lg uppercase tracking-wide bg-amber-400/10 px-4 py-2 rounded-full inline-block">
+							<span className="text-amber-400 font-medium text-sm uppercase tracking-widest bg-amber-400/10 px-4 py-2 rounded-full inline-block mb-4">
 								Learning Management System
 							</span>
-							<h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 bg-clip-text text-transparent">
+							<h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 bg-clip-text text-transparent leading-tight">
 								Transform Your
-								<span className="block mt-3">Learning Journey</span>
+								<span className="block mt-3 text-white">Learning Journey</span>
 							</h1>
 						</div>
 
-						<p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
+						<p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl opacity-90">
 							Master in-demand skills with industry-relevant courses curated by experts. Experience
 							interactive learning with personalized mentorship and real-world projects.
 						</p>
 
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
-							<Link to="/courses" className="group relative bg-amber-500 hover:bg-amber-600 text-gray-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/30 flex items-center gap-2">
+							<Link 
+								to="/courses" 
+								className="group relative inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-gray-900 px-8 py-3 rounded-xl font-bold text-base transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/30"
+							>
 								Explore Courses
-								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-								<span className="absolute -inset-0.5 bg-amber-500/30 blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
+								<ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
 							</Link>
-							<Link to="/contact" className="group relative border-2 border-amber-500 text-amber-500 hover:bg-amber-500/10 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-amber-500/20">
+							<Link 
+								to="/contact" 
+								className="group relative inline-flex items-center justify-center border-2 border-amber-500 text-amber-500 hover:bg-amber-500/10 px-8 py-3 rounded-xl font-bold text-base transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+							>
 								Contact Us
-								<span className="absolute -inset-0.5 bg-amber-500/10 blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
 							</Link>
 						</div>
 
-						<div className="flex items-center justify-center lg:justify-start gap-4 mt-8 pt-4">
-							<div className="flex -space-x-2">
+						<div className="flex items-center justify-center lg:justify-start gap-6 mt-10 pt-4">
+							<div className="flex -space-x-3">
 								{[1, 2, 3, 4].map((i) => (
 									<div
 										key={i}
-										className="w-10 h-10 rounded-full border-2 border-gray-900 overflow-hidden">
+										className="w-12 h-12 rounded-full border-2 border-gray-800 overflow-hidden shadow-lg"
+									>
 										<img
 											src={`https://randomuser.me/api/portraits/men/${i + 20}.jpg`}
 											alt="User"
@@ -82,8 +87,8 @@ function HomePage() {
 								))}
 							</div>
 							<div className="text-sm text-gray-400">
-								<p className="font-semibold text-white">500+ students</p>
-								<p>joined this week</p>
+								<p className="font-bold text-white text-base">500+ students</p>
+								<p className="opacity-75">joined this week</p>
 							</div>
 						</div>
 					</div>
@@ -92,20 +97,20 @@ function HomePage() {
 					<div className="lg:w-1/2 flex items-center justify-center order-1 lg:order-2 relative group">
 						<div className="absolute -top-20 -right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -z-10" />
 						<div className="absolute -bottom-20 -left-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -z-10" />
-						<div className="relative before:absolute before:-inset-4 before:bg-gradient-to-tr before:from-amber-400/30 before:via-transparent before:to-purple-400/30 before:rounded-3xl before:blur-xl">
+						<div className="relative p-2 rounded-3xl bg-gradient-to-tr from-amber-400/30 via-transparent to-purple-400/30">
 							<img
 								alt="Online Learning Platform"
 								src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 								className="max-w-full h-auto rounded-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105 relative z-10"
 							/>
-							<div className="absolute -right-8 -bottom-8 bg-gray-900 rounded-2xl p-4 shadow-xl z-20 transform transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2">
-								<div className="flex items-center gap-3">
+							<div className="absolute -right-6 -bottom-6 bg-gray-900/80 backdrop-blur-sm rounded-2xl p-5 shadow-xl z-20 transform transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2">
+								<div className="flex items-center gap-4">
 									<div className="bg-amber-400/20 p-3 rounded-xl">
-										<Star className="w-6 h-6 text-amber-400" />
+										<Star className="w-7 h-7 text-amber-400" />
 									</div>
 									<div>
-										<p className="text-lg font-bold text-white">4.9/5.0</p>
-										<p className="text-sm text-gray-400">Student Rating</p>
+										<p className="text-xl font-bold text-white">4.9/5.0</p>
+										<p className="text-xs text-gray-400 uppercase tracking-wider">Student Rating</p>
 									</div>
 								</div>
 							</div>
