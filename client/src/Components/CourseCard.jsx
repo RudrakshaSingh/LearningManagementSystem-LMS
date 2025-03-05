@@ -11,7 +11,7 @@ function CourseCard({ data }) {
     return (
         <div 
             onClick={() => navigate("/course/description/", { state: { ...data } })}
-            className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+            className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-2  rounded-2xl"
         >
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-teal-100 hover:border-teal-300 transition-all duration-300">
                 {/* Course Image */}

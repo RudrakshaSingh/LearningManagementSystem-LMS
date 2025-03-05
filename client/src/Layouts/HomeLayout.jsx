@@ -43,12 +43,12 @@ function HomeLayout({ children }) {
             {/* Navigation Drawer */}
             <div className="drawer absolute left-0 z-50 w-fit">
                 <input className="drawer-toggle" id="my-drawer" type="checkbox" />
-                <div className="drawer-content">
+                <div className="drawer-content fixed">
                     <label htmlFor="my-drawer" className="cursor-pointer relative">
                         <FiMenu 
                             onClick={changeWidth} 
                             size={"32px"} 
-                            className="font-bold text-amber-400 m-4 hover:text-amber-300 transition-colors" 
+                            className="font-bold text-gray-600 m-4 hover:text-gray-500 transition-colors" 
                         />
                     </label>
                 </div>

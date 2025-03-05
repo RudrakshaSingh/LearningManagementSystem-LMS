@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChevronLeft, ChevronRight,Search } from "lucide-react";
 import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
