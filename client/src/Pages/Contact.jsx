@@ -54,64 +54,85 @@ function Contact() {
 
     return (
         <HomeLayout>
-            <div className="flex items-center justify-center h-[100vh]">
-                <form
-                    noValidate
-                    onSubmit={onFormSubmit}
-                    className="flex flex-col items-center justify-center gap-2 p-5 rounded-3xl text-white shadow-[10px_10px_150px_gray] w-[22rem]"
-                >
-                    <h1 className="text-3xl font-semibold">Contact Form</h1>
-
-                    <div className="flex flex-col w-full gap-1">
-                        <label htmlFor="name" className="text-xl font-semibold">
-                            Name
-                        </label>
-                        <input
-                            className="bg-transparent border px-2 py-1 rounded-md"
-                            id="name"
-                            type="text"
-                            name="name"
-                            placeholder="Enter your name"
-                            onChange={handleInputChange}
-                            value={userInput.name}
-                        />
-                    </div>
-
-                    <div className="flex flex-col w-full gap-1">
-                        <label htmlFor="email" className="text-xl font-semibold">
-                            Email
-                        </label>
-                        <input
-                            className="bg-transparent border px-2 py-1 rounded-md"
-                            id="email"
-                            type="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            onChange={handleInputChange}
-                            value={userInput.email}
-                        />
-                    </div>
-
-                    <div className="flex flex-col w-full gap-1">
-                        <label htmlFor="message" className="text-xl font-semibold">
-                            Message
-                        </label>
-                        <textarea
-                            className="bg-transparent border px-2 py-1 rounded-md resize-none h-40"
-                            id="message"
-                            name="message"
-                            placeholder="Enter your email"
-                            onChange={handleInputChange}
-                            value={userInput.message}
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-full py-2 font-semibold text-lg cursor-pointer"
+            <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 p-4">
+                <div className="w-full max-w-md">
+                    <form
+                        noValidate
+                        onSubmit={onFormSubmit}
+                        className="bg-gray-800 shadow-2xl rounded-2xl p-8 space-y-6 border border-gray-700 transform transition-all duration-300 hover:scale-105"
                     >
-                        Submit
-                    </button>
-                </form>
+                        <div className="text-center mb-6">
+                            <h1 className="text-4xl font-bold text-white tracking-wide">
+                                Contact Us
+                            </h1>
+                            <p className="text-gray-400 mt-2">
+                                We&apos;d love to hear from you
+                            </p>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div>
+                                <label 
+                                    htmlFor="name" 
+                                    className="block text-sm font-medium text-gray-300 mb-2"
+                                >
+                                    Name
+                                </label>
+                                <input
+                                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300"
+                                    id="name"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Enter your name"
+                                    onChange={handleInputChange}
+                                    value={userInput.name}
+                                />
+                            </div>
+
+                            <div>
+                                <label 
+                                    htmlFor="email" 
+                                    className="block text-sm font-medium text-gray-300 mb-2"
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300"
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    onChange={handleInputChange}
+                                    value={userInput.email}
+                                />
+                            </div>
+
+                            <div>
+                                <label 
+                                    htmlFor="message" 
+                                    className="block text-sm font-medium text-gray-300 mb-2"
+                                >
+                                    Message
+                                </label>
+                                <textarea
+                                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white h-40 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300"
+                                    id="message"
+                                    name="message"
+                                    placeholder="Enter your message"
+                                    onChange={handleInputChange}
+                                    value={userInput.message}
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full bg-yellow-600 text-white py-3 rounded-lg hover:bg-yellow-500 transition-all ease-in-out duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+                        >
+                            Send Message
+                        </button>
+                    </form>
+                </div>
             </div>
         </HomeLayout>
     );
