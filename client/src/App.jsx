@@ -18,6 +18,8 @@ import NotFound from "./Pages/NotFound";
 import Checkout from "./Pages/Payment/Checkout";
 import CheckoutFailure from "./Pages/Payment/CheckoutFailure";
 import CheckoutSuccess from "./Pages/Payment/CheckoutSuccess";
+import PrivacyPolicy from "./Pages/Policy/PrivacyPolicy";
+import TermsofService from "./Pages/Policy/TermsofService";
 import SignUp from "./Pages/SignUp";
 import EditProfile from "./Pages/User/EditProfile";
 import Profile from "./Pages/User/Profile";
@@ -53,6 +55,9 @@ function App() {
                 </Route>
 
                 <Route path="*" element={<NotFound />}></Route>
+
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsofService />} />
             </Routes>
         </>
     );

@@ -90,7 +90,15 @@ os react-hot-toast @tailwindcss/line-clamp
     plugins: [..., 'simple-import-sort']
 ```
 
-4. To enable auto import sort on file save in vscode
+4. add rule
+
+```
+rules: {
+        "simple-import-sort/imports": "error",
+}
+```
+
+5. To enable auto import sort on file save in vscode
 
     - Open `settings.json`
     - add the following config
@@ -99,4 +107,49 @@ os react-hot-toast @tailwindcss/line-clamp
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     }
+```
+
+### Redux toolkit
+
+folder Redux -> folder Slices -file authSlice.js - file store.js
+
+==store.js
+configurestore
+reducer
+devtools for production
+
+const store = configureStore({
+reducer: {
+auth: authSliceReducer,
+},
+devTools: true,
+});
+
+app.jsx make provider component from react-redux give store to provider
+
+==authSlice.js -for authentication
+createSlice({name:
+initialstate,
+reducers
+})
+initial state
+
+### Axios instance
+
+for dedicated axios instance to make same configuration for all requests
+
+axiosInstance.js
+
+```
+import axios from "axios";
+
+const BASE_URL = "http://localhost:5000/api/v1";
+
+const axiosInstance = axios.create();
+
+axiosInstance.defaults.baseURL = BASE_URL;
+axiosInstance.defaults.withCredentials = true;
+//you can google axios instance defaults
+
+export default axiosInstance;
 ```

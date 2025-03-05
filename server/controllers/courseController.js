@@ -161,7 +161,7 @@ export const addLectureToCourseById = asyncHandler(async (req, res, next) => {
         lecture: lectureData,
     });
 
-    course.numberOfLectures = course.lectures.length;
+    course.numbersOfLectures = course.lectures.length;
 
     // Save the course object
     await course.save();

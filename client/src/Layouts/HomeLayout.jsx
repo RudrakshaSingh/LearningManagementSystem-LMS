@@ -39,79 +39,132 @@ function HomeLayout({ children }) {
     }
 
     return (
-        <div className="min-h-[90vh]">
+        <div className="min-h-[90vh] relative">
+            {/* Navigation Drawer */}
             <div className="drawer absolute left-0 z-50 w-fit">
                 <input className="drawer-toggle" id="my-drawer" type="checkbox" />
-                <div className="drawer-content">
+                <div className="drawer-content fixed">
                     <label htmlFor="my-drawer" className="cursor-pointer relative">
-                        <FiMenu onClick={changeWidth} size={"32px"} className="font-bold text-white m-4" />
+                        <FiMenu 
+                            onClick={changeWidth} 
+                            size={"32px"} 
+                            className="font-bold text-gray-600 m-4 hover:text-gray-500 transition-colors" 
+                        />
                     </label>
                 </div>
+                
+                {/* Sidebar */}
                 <div className="drawer-side w-0">
                     <label htmlFor="my-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-200 text-base-content relative">
-                        <li className="w-fit absolute right-2 z-50">
-                            <button onClick={hideDrawer}>
-                                <AiFillCloseCircle size={24} />
+                    <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-gradient-to-br from-gray-900 to-gray-800 text-base-content relative shadow-xl">
+                        {/* Close Button */}
+                        <li className="w-fit absolute right-2 top-2 z-50">
+                            <button 
+                                onClick={hideDrawer}
+                                className="hover:bg-white rounded-full p-1 transition-colors duration-200"
+                            >
+                                <AiFillCloseCircle size={24} className="text-amber-400" />
                             </button>
                         </li>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        {isLoggedIn && role === "ADMIN" && (
+
+                        {/* Navigation Items */}
+                        <div className="space-y-2 mt-8">
                             <li>
-                                <Link to="/admin/dashboard"> Admin DashBoard</Link>
+                                <Link 
+                                    to="/" 
+                                    className="text-amber-400 hover:bg-white rounded-lg px-4 py-3 flex items-center gap-2 transition-colors"
+                                >
+                                    <span className="text-xl">🏠</span> Home
+                                </Link>
                             </li>
-                        )}
-                        {isLoggedIn && role === "ADMIN" && (
+
+                            {isLoggedIn && role === "ADMIN" && (
+                                <div className="mt-4 pt-4 border-t border-gray-700">
+                                    <p className="px-4 text-sm font-semibold text-amber-400 mb-2">Admin Panel</p>
+                                    <li>
+                                        <Link 
+                                            to="/admin/dashboard"
+                                            className="text-amber-400 hover:bg-white rounded-lg px-4 py-3 flex items-center gap-2 transition-colors"
+                                        >
+                                            <span className="text-xl">📊</span> Dashboard
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link 
+                                            to="/course/create"
+                                            className="text-amber-400 hover:bg-white rounded-lg px-4 py-3 flex items-center gap-2 transition-colors"
+                                        >
+                                            <span className="text-xl">🎓</span> Create Course
+                                        </Link>
+                                    </li>
+                                </div>
+                            )}
+
                             <li>
-                                <Link to="/course/create"> Create new course</Link>
+                                <Link 
+                                    to="/courses"
+                                    className="text-amber-400 hover:bg-white rounded-lg px-4 py-3 flex items-center gap-2 transition-colors"
+                                >
+                                    <span className="text-xl">📚</span> All Courses
+                                </Link>
                             </li>
-                        )}
 
-                        <li>
-                            <Link to="/courses">All Courses</Link>
-                        </li>
-
-                        <li>
-                            <Link to="/contact">Contact Us</Link>
-                        </li>
-
-                        <li>
-                            <Link to="/about">About Us</Link>
-                        </li>
-
-                        {!isLoggedIn && (
-                            <li className="absolute bottom-4 w-[90%]  ">
-                                <div className="w-full flex items-center justify-center  ">
-                                    <button className="btn-sm text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl btn font-medium rounded-lg text-sm px-10  text-center ">
-                                        <Link to="/login">Login</Link>
-                                    </button>
-                                    <button className="btn-sm text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl btn font-medium rounded-lg text-sm px-10  text-center ">
-                                        <Link to="/signup">Signup</Link>
-                                    </button>
-                                </div>
+                            <li>
+                                <Link 
+                                    to="/contact"
+                                    className="text-amber-400 hover:bg-white rounded-lg px-4 py-3 flex items-center gap-2 transition-colors"
+                                >
+                                    <span className="text-xl">📧</span> Contact Us
+                                </Link>
                             </li>
-                        )}
 
-                        {isLoggedIn && (
-                            <li className="absolute bottom-4 w-[90%]">
-                                <div className="w-full flex items-center justify-center">
-                                    <button className="btn-sm text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl btn font-medium rounded-lg text-sm px-10  text-center ">
-                                        <Link to="/user/profile">Profile</Link>
-                                    </button>
-                                    <button className="btn-sm text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl btn font-medium rounded-lg text-sm px-10  text-center ">
-                                        <Link onClick={handleLogout}>Logout</Link>
-                                    </button>
-                                </div>
+                            <li>
+                                <Link 
+                                    to="/about"
+                                    className="text-amber-400 hover:bg-white rounded-lg px-4 py-3 flex items-center gap-2 transition-colors"
+                                >
+                                    <span className="text-xl">ℹ️</span> About Us
+                                </Link>
                             </li>
+                        </div>
+
+                        {/* Auth Buttons */}
+                        {!isLoggedIn ? (
+                            <div className="absolute bottom-6 w-[85%] space-y-3">
+                                <Link
+                                    to="/login"
+                                    className="btn btn-block bg-amber-500 hover:bg-amber-600 text-gray-900 rounded-full py-3 shadow-lg transition-all duration-300 hover:scale-105"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to="/signup"
+                                    className="btn btn-block bg-gray-800 text-amber-400 border-2 border-amber-400 hover:bg-gray-700 rounded-full py-3 shadow-lg transition-all duration-300 hover:scale-105"
+                                >
+                                    Sign Up
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="absolute bottom-6 w-[85%] space-y-3">
+                                <Link
+                                    to="/user/profile"
+                                    className="btn btn-block bg-amber-500 hover:bg-amber-600 text-gray-900 rounded-full py-3 shadow-lg transition-all duration-300 hover:scale-105"
+                                >
+                                    👤 View Profile
+                                </Link>
+                                <button
+                                    onClick={handleLogout}
+                                    className="btn btn-block bg-gray-800 text-amber-400 border-2 border-amber-400 hover:bg-gray-700 rounded-full py-3 shadow-lg transition-all duration-300 hover:scale-105"
+                                >
+                                    Logout
+                                </button>
+                            </div>
                         )}
                     </ul>
                 </div>
             </div>
 
             {children}
-
             <Footer />
         </div>
     );
