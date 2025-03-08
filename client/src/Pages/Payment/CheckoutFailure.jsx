@@ -6,32 +6,41 @@ import HomeLayout from "../../Layouts/HomeLayout";
 function CheckoutFailure() {
     return (
         <HomeLayout>
-            <div className="min-h-[90vh] flex items-center justify-center text-white">
-                <div className="w-80 h-[26rem] flex flex-col justify-center items-center shadow-[0_0_10px_black] rounded-lg relative">
-                    <h1 className="bg-red-500 absolute text-center top-0 w-full py-4 text-2xl font-bold rounded-tl-lg rounded-tr-lg">Payment failed</h1>
-
-                    <div className="px-4 flex flex-col items-center justify-center space-y-2">
-                        <div className="text-center space-y-2">
-                            <h2 className="text-lg font-semibold">
-                                Oops ! Your payment failed
-                            </h2>
-                            <p className="text-left">
-                                Please try again later
-                            </p>
-
+            <div className="min-h-[90vh] bg-teal-50 py-16 px-4 sm:px-8 lg:px-16 flex items-center justify-center">
+                <div className="max-w-7xl mx-auto">
+                    <div className="w-96 bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <div className="bg-red-500 py-6 px-6">
+                            <h1 className="text-center text-2xl font-bold text-white">
+                                Payment Failed
+                            </h1>
                         </div>
-                        <RxCrossCircled className="text-red-500 text-5xl" />
+                        
+                        <div className="px-8 py-12 flex flex-col items-center justify-center space-y-6">
+                            <RxCrossCircled className="text-red-500 text-7xl" />
+                            
+                            <div className="text-center space-y-4">
+                                <h2 className="text-xl font-semibold text-gray-800">
+                                    Oops! Your payment failed
+                                </h2>
+                                
+                                <p className="text-gray-600 text-lg">
+                                    Something went wrong with your transaction. Please try again later.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="px-8 pb-8">
+                            <Link to="/checkout" className="block w-full">
+                                <button className="w-full bg-red-500 hover:bg-red-600 text-white text-xl font-semibold py-3 px-6 rounded-full transition-all duration-300 focus:ring-2 focus:ring-red-400 focus:ring-opacity-50">
+                                    Try again
+                                </button>
+                            </Link>
+                        </div>
                     </div>
-
-                    <Link to="/checkout" className="bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-300 absolute bottom-0 w-full py-2 text-xl font-semibold text-center rounded-br-lg rounded-bl-lg">
-                        <button>Try again</button>
-                    </Link>
-
                 </div>
-
             </div>
         </HomeLayout>
-    )
+    );
 }
 
 export default CheckoutFailure;

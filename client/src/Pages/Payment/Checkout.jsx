@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { BiRupee } from "react-icons/bi";
@@ -12,7 +13,7 @@ function Checkout() {
     const navigate = useNavigate();
     const razorpayKey = useSelector((state) => state?.razorpay?.key);
     const subscription_id = useSelector((state) => state?.razorpay?.subscription_id);
-    // const userData = useSelector((state) => state?.auth?.data);
+    const userData = useSelector((state) => state?.auth?.data);
     const paymentDetails = {
         razorpay_payment_id: "",
         razorpay_subscription_id: "",
@@ -31,16 +32,16 @@ function Checkout() {
             name: "Coursify Pvt. Ltd.",
             description: "Subscription",
             theme: {
-                color: "#F37254",
+                color: "#0D9488", // Teal color to match the theme
             },
-            // prefill: { email: userData.email, name: userData.fullName },
+            prefill: { email: userData.email, name: userData.fullName },
 
-            handler: async function (response) {
+            handler: async function (response) {//jab options acchi tarah submiut hoga hme handler wapas milega
                 paymentDetails.razorpay_payment_id = response.razorpay_payment_id;
                 paymentDetails.razorpay_signature = response.razorpay_signature;
                 paymentDetails.razorpay_subscription_id = response.razorpay_subscription_id;
 
-                toast.success("Payment successfull");
+                toast.success("Payment successful");
 
                 const res = await dispatch(verifyUserPayment(paymentDetails));
                 res?.payload?.success ? navigate("/checkout/success") : navigate("/checkout/fail");
@@ -62,37 +63,57 @@ function Checkout() {
 
     return (
         <HomeLayout>
-            <form onSubmit={handleSubscription} className="min-h-[90vh] flex items-center justify-center text-white">
-                <div className="w-80 h-[26rem] flex flex-col justify-center shadow-[0_0_10px_black] rounded-lg relative">
-                    <h1 className="bg-yellow-500 absolute top-0 w-full text-center py-4 text-2xl font-bold rounded-tl0lg rounded-tr-lg">
-                        Subscription Bundle
-                    </h1>
-                    <div className="px-4 space-y-5 text-center">
-                        <p className="text-[17px]">
-                            This purchase will allow you to access all available course of our platform for{" "}
-                            <span className="text-yellow-500 font-bold">
-                                <br />1 Year duration
-                            </span>{" "}
-                            All the existing and new launched courses will be also available
-                        </p>
+            <div className="min-h-[90vh] bg-teal-50 py-16 px-4 sm:px-8 lg:px-16 flex items-center justify-center">
+                <div className="max-w-7xl mx-auto">
+                    <form onSubmit={handleSubscription} className="flex items-center justify-center">
+                        <div className="w-96 bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                            <div className="bg-teal-600 py-6 px-6">
+                                <h1 className="text-center text-2xl font-bold text-white">
+                                    Subscription Bundle
+                                </h1>
+                            </div>
+                            
+                            <div className="px-8 py-10 space-y-6">
+                                <div className="text-center space-y-4">
+                                    <p className="text-gray-700 text-lg leading-relaxed">
+                                        This purchase will allow you to access all available courses on our platform for{" "}
+                                        <span className="text-teal-600 font-bold">
+                                            1 Year duration
+                                        </span>
+                                    </p>
+                                    <p className="text-gray-600">
+                                        All existing and newly launched courses will be available to you.
+                                    </p>
+                                </div>
 
-                        <p className="flex items-center justify-center gap-1 text-2xl font-bold text-yellow-500">
-                            <BiRupee />
-                            <span>3</span> only
-                        </p>
-                        <div className="text-gray-200">
-                            <p>100% refund on cancellation</p>
-                            <p>* Terms and conditions applied *</p>
+                                <div className="flex items-center justify-center">
+                                    <div className="bg-teal-50 px-8 py-4 rounded-full">
+                                        <p className="flex items-center text-3xl font-bold text-teal-600">
+                                            <BiRupee />
+                                            <span>3</span>
+                                            <span className="text-lg ml-1">only</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="text-gray-500 text-sm text-center space-y-1">
+                                    <p>100% refund on cancellation</p>
+                                    <p>* Terms and conditions applied *</p>
+                                </div>
+                            </div>
+
+                            <div className="px-8 pb-8">
+                                <button
+                                    type="submit"
+                                    className="w-full bg-teal-600 hover:bg-teal-700 text-white text-xl font-semibold py-3 px-6 rounded-full transition-all duration-300 focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50"
+                                >
+                                    Buy now
+                                </button>
+                            </div>
                         </div>
-                        <button
-                            type="submit"
-                            className="bg-yellow-500 hover:bg-yellow-600 transition-all ease-in-out duration-300 absolute bottom-0 w-full left-0 text-xl font-bold rounded-bl-lg rounded-br-lg py-2"
-                        >
-                            Buy now
-                        </button>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </HomeLayout>
     );
 }
