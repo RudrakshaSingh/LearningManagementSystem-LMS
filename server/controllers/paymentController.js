@@ -189,7 +189,7 @@ export const allPayments = asyncHandler(async (req, res, _next) => {
     const allPayments = await razorpay.subscriptions.all({
         plan_id: process.env.RAZORPAY_PLAN_ID,
         count: count ? count : 10, // If count is sent then use that else default to 10
-        skip: skip ? skip : 17, // // If skip is sent then use that else default to 0
+        skip: skip ? skip : 23, // // If skip is sent then use that else default to 0
     });
 
     const monthNames = [
