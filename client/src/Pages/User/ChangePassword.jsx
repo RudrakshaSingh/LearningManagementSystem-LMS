@@ -1,24 +1,25 @@
-import { Lock } from "lucide-react";
+import { Lock, Save } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import HomeLayout from "../../Layouts/HomeLayout";
-import { resetPassword } from "../../Redux/Slices/AuthSlice";
+import { changePassword } from "../../Redux/Slices/AuthSlice";
 
-function ResetPassword() {
+function ChangePassword() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { resetToken } = useParams(); // Extract resetToken from URL
 
     const [passwordData, setPasswordData] = useState({
-        password: "",
+        oldPassword: "",
+        newPassword: "",
         confirmPassword: "",
     });
 
     const [visibility, setVisibility] = useState({
-        password: false,
+        oldPassword: false,
+        newPassword: false,
         confirmPassword: false,
     });
 
@@ -39,20 +40,23 @@ function ResetPassword() {
 
     async function onFormSubmit(e) {
         e.preventDefault();
-        if (!passwordData.password || !passwordData.confirmPassword) {
+        if (!passwordData.oldPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
             toast.error("Please fill all fields");
             return;
         }
-        if (passwordData.password !== passwordData.confirmPassword) {
-            toast.error("Passwords do not match");
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            toast.error("New password and confirmation do not match");
             return;
         }
 
-        const response = await dispatch(resetPassword({ resetToken, password: passwordData.password }));
+        const response = await dispatch(changePassword({
+            oldPassword: passwordData.oldPassword,
+            newPassword: passwordData.newPassword,
+        }));
         if (response?.payload?.success) {
-            setPasswordData({ password: "", confirmPassword: "" });
-            toast.success("Password reset successfully! Please log in.");
-            navigate("/login"); // Redirect to login after success
+            setPasswordData({ oldPassword: "", newPassword: "", confirmPassword: "" });
+            toast.success("Password changed successfully!");
+            navigate("/user/profile"); // Redirect back to profile after success
         }
     }
 
@@ -67,17 +71,49 @@ function ResetPassword() {
                     >
                         <div className="text-center">
                             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                                Reset Password
+                                Change Password
                             </h1>
                             <p className="text-gray-500 text-sm">
-                                Enter your new password below
+                                Update your password securely
                             </p>
                         </div>
 
                         <div className="space-y-5">
                             <div className="relative">
                                 <label
-                                    htmlFor="password"
+                                    htmlFor="oldPassword"
+                                    className="mb-1 text-sm font-medium text-gray-700 flex items-center gap-2"
+                                >
+                                    <Lock className="w-4 h-4 text-teal-600" />
+                                    Old Password
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type={visibility.oldPassword ? "text" : "password"}
+                                        required
+                                        name="oldPassword"
+                                        id="oldPassword"
+                                        placeholder="••••••••"
+                                        className="w-full pl-10 pr-12 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-gray-900 placeholder-gray-400 transition-all duration-200"
+                                        onChange={handleInputChange}
+                                        value={passwordData.oldPassword}
+                                    />
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <Lock className="w-5 h-5 text-gray-400" />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleVisibility("oldPassword")}
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-teal-600 transition-colors duration-200"
+                                    >
+                                        {visibility.oldPassword ? "Hide" : "Show"}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="relative">
+                                <label
+                                    htmlFor="newPassword"
                                     className="mb-1 text-sm font-medium text-gray-700 flex items-center gap-2"
                                 >
                                     <Lock className="w-4 h-4 text-teal-600" />
@@ -85,24 +121,24 @@ function ResetPassword() {
                                 </label>
                                 <div className="relative">
                                     <input
-                                        type={visibility.password ? "text" : "password"}
+                                        type={visibility.newPassword ? "text" : "password"}
                                         required
-                                        name="password"
-                                        id="password"
+                                        name="newPassword"
+                                        id="newPassword"
                                         placeholder="••••••••"
                                         className="w-full pl-10 pr-12 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-gray-900 placeholder-gray-400 transition-all duration-200"
                                         onChange={handleInputChange}
-                                        value={passwordData.password}
+                                        value={passwordData.newPassword}
                                     />
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <Lock className="w-5 h-5 text-gray-400" />
                                     </div>
                                     <button
                                         type="button"
-                                        onClick={() => toggleVisibility("password")}
+                                        onClick={() => toggleVisibility("newPassword")}
                                         className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-teal-600 transition-colors duration-200"
                                     >
-                                        {visibility.password ? "Hide" : "Show"}
+                                        {visibility.newPassword ? "Hide" : "Show"}
                                     </button>
                                 </div>
                             </div>
@@ -113,7 +149,7 @@ function ResetPassword() {
                                     className="mb-1 text-sm font-medium text-gray-700 flex items-center gap-2"
                                 >
                                     <Lock className="w-4 h-4 text-teal-600" />
-                                    Confirm Password
+                                    Confirm New Password
                                 </label>
                                 <div className="relative">
                                     <input
@@ -142,9 +178,10 @@ function ResetPassword() {
 
                         <button
                             type="submit"
-                            className="mt-4 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
+                            className="mt-4 flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
                         >
-                            Reset Password
+                            <Save className="w-5 h-5" />
+                            Change Password
                         </button>
                     </form>
                 </div>
@@ -153,4 +190,4 @@ function ResetPassword() {
     );
 }
 
-export default ResetPassword;
+export default ChangePassword;

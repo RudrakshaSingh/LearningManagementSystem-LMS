@@ -119,6 +119,23 @@ export const resetPassword = createAsyncThunk("/auth/reset-password", async ({ r
     }
 });
 
+export const changePassword = createAsyncThunk("/auth/change-password", async ({ oldPassword, newPassword }) => {
+    try {
+        const res = axiosInstance.post("user/change-password", { oldPassword, newPassword });
+        toast.promise(res, {
+            loading: "Changing your password...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to change password",
+        });
+        return (await res).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message || "Something went wrong");
+        throw error;
+    }
+});
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,

@@ -21,6 +21,7 @@ import CheckoutSuccess from "./Pages/Payment/CheckoutSuccess";
 import PrivacyPolicy from "./Pages/Policy/PrivacyPolicy";
 import TermsofService from "./Pages/Policy/TermsofService";
 import SignUp from "./Pages/SignUp";
+import ChangePassword from "./Pages/User/ChangePassword";
 import EditProfile from "./Pages/User/EditProfile";
 import ForgotPassword from "./Pages/User/ForgotPassword";
 import Profile from "./Pages/User/Profile";
@@ -52,6 +53,7 @@ function App() {
                 <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
                     <Route path="/user/profile" element={<Profile />} />
                     <Route path="/user/editprofile" element={<EditProfile />} />
+                    <Route path="/changepassword" element={<ChangePassword />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/checkout/success" element={<CheckoutSuccess />} />
                     <Route path="/checkout/fail" element={<CheckoutFailure />} />
