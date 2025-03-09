@@ -89,7 +89,7 @@ function Contact() {
                                     onChange={handleInputChange}
                                     value={userInput.name}
                                 />
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <div className="absolute top-10 left-0 pl-3 flex items-center pointer-events-none">
                                     <User className="w-5 h-5 text-gray-400" />
                                 </div>
                             </div>
@@ -111,7 +111,7 @@ function Contact() {
                                     onChange={handleInputChange}
                                     value={userInput.email}
                                 />
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <div className="absolute top-10 left-0 pl-3 flex items-center pointer-events-none">
                                     <Mail className="w-5 h-5 text-gray-400" />
                                 </div>
                             </div>
@@ -132,7 +132,7 @@ function Contact() {
                                     onChange={handleInputChange}
                                     value={userInput.message}
                                 />
-                                <div className="absolute top-3 left-0 pl-3 flex items-center pointer-events-none">
+                                <div className="absolute top-10 left-0 pl-3 flex items-center pointer-events-none">
                                     <MessageSquare className="w-5 h-5 text-gray-400" />
                                 </div>
                             </div>

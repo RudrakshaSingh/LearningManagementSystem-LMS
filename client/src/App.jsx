@@ -22,7 +22,9 @@ import PrivacyPolicy from "./Pages/Policy/PrivacyPolicy";
 import TermsofService from "./Pages/Policy/TermsofService";
 import SignUp from "./Pages/SignUp";
 import EditProfile from "./Pages/User/EditProfile";
+import ForgotPassword from "./Pages/User/ForgotPassword";
 import Profile from "./Pages/User/Profile";
+import ResetPassword from "./Pages/User/ResetPassword";
 
 function App() {
     return (
@@ -38,6 +40,8 @@ function App() {
 
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
                 <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
                     <Route path="/course/create" element={<CreateCourse />} />

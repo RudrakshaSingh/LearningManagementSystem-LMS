@@ -119,6 +119,16 @@ function Login() {
                             </div>
                         </div>
 
+                        {/* Forgot Password Link */}
+                        <div className="text-right">
+                            <Link
+                                to="/forgot-password"
+                                className="text-sm text-teal-600 hover:text-teal-700 hover:underline transition-colors duration-200"
+                            >
+                                Forgot Password?
+                            </Link>
+                        </div>
+
                         <button
                             type="submit"
                             className="mt-4 flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 group"

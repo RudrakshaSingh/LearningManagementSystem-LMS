@@ -86,6 +86,39 @@ export const getUserData = createAsyncThunk("/user/details", async () => {
 	}
 });
 
+export const forgotPassword = createAsyncThunk("/auth/forgot-password", async (email) => {
+    try {
+        const res = axiosInstance.post("user/forgot-password", { email }); // Updated endpoint
+        toast.promise(res, {
+            loading: "Sending reset instructions...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to send reset instructions",
+        });
+        return (await res).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message || "Something went wrong");
+        throw error;
+    }
+});
+export const resetPassword = createAsyncThunk("/auth/reset-password", async ({ resetToken, password }) => {
+    try {
+        const res = axiosInstance.post(`user/reset-password/${resetToken}`, { password });
+        toast.promise(res, {
+            loading: "Resetting your password...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to reset password",
+        });
+        return (await res).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message || "Something went wrong");
+        throw error;
+    }
+});
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
