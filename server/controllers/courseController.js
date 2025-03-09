@@ -216,7 +216,7 @@ export const removeLectureFromCourse = asyncHandler(async (req, res, next) => {
     course.lectures.splice(lectureIndex, 1);
 
     // update the number of lectures based on lectres array length
-    course.numberOfLectures = course.lectures.length;
+    course.numbersOfLectures = course.lectures.length;
 
     // Save the course object
     await course.save();
