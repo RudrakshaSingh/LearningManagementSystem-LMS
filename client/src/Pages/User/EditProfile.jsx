@@ -1,9 +1,4 @@
-import { 
-  ArrowLeft, 
-  Camera, 
-  Save, 
-  Upload, 
-  UserCircle} from "lucide-react";
+import { ArrowLeft, Camera, Save, Upload, UserCircle } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,50 +55,49 @@ function EditProfile() {
         formData.append("fullName", data.fullName);
         formData.append("avatar", data.avatar);
 
-        await dispatch(updateProfile([data.userId, formData]));//can only send one parameter to createAsyncThunk
-
-        await dispatch(getUserData());//updating user state
+        await dispatch(updateProfile([data.userId, formData]));
+        await dispatch(getUserData());
 
         navigate("/user/profile");
     }
 
     return (
         <HomeLayout>
-            <div className="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 flex items-center justify-center p-4">
-                <div className="w-full max-w-md bg-gradient-to-br from-gray-800/80 to-gray-700/80 rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50 backdrop-blur-sm">
+            <div className="min-h-[calc(100vh-80px)] bg-gray-50 flex items-center justify-center p-4">
+                <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-amber-400/20 to-purple-400/20 p-6 flex items-center justify-between">
-                        <Link 
-                            to="/user/profile" 
-                            className="text-white hover:bg-white/10 p-2 rounded-full transition-colors"
+                    <div className="bg-teal-600 p-6 flex items-center justify-between">
+                        <Link
+                            to="/user/profile"
+                            className="text-white hover:bg-white/20 p-2 rounded-full transition-colors duration-200"
                         >
-                            <ArrowLeft className="w-6 h-6 text-amber-400" />
+                            <ArrowLeft className="w-6 h-6" />
                         </Link>
-                        <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-amber-400 to-purple-400 bg-clip-text text-center flex-grow">
+                        <h1 className="text-2xl font-bold text-white text-center flex-grow">
                             Edit Profile
                         </h1>
                     </div>
-                    
+
                     <form onSubmit={onFormSubmit} className="p-6 space-y-6">
                         {/* Avatar Upload */}
                         <div className="flex flex-col items-center">
                             <div className="relative group">
-                                <label 
-                                    htmlFor="image_uploads" 
+                                <label
+                                    htmlFor="image_uploads"
                                     className="cursor-pointer block relative"
                                 >
                                     {data.previewImage ? (
-                                        <img 
-                                            className="w-36 h-36 rounded-full object-cover border-4 border-amber-400/30 shadow-lg group-hover:opacity-70 transition-opacity"
-                                            src={data.previewImage} 
+                                        <img
+                                            className="w-32 h-32 rounded-full object-cover border-4 border-teal-200 shadow-md group-hover:opacity-80 transition-opacity duration-300"
+                                            src={data.previewImage}
                                             alt="Profile"
                                         />
                                     ) : (
-                                        <UserCircle 
-                                            className="w-36 h-36 text-gray-600 group-hover:text-amber-400 transition-colors"
+                                        <UserCircle
+                                            className="w-32 h-32 text-gray-400 group-hover:text-teal-500 transition-colors duration-300"
                                         />
                                     )}
-                                    <div className="absolute bottom-0 right-0 bg-amber-400 text-gray-900 rounded-full p-2 shadow-lg group-hover:bg-amber-500 transition-colors">
+                                    <div className="absolute bottom-0 right-0 bg-teal-600 text-white rounded-full p-2 shadow-md group-hover:bg-teal-700 transition-colors duration-300">
                                         <Camera className="w-5 h-5" />
                                     </div>
                                 </label>
@@ -116,42 +110,40 @@ function EditProfile() {
                                     accept=".jpg, .png, .svg, .jpeg"
                                 />
                             </div>
-                            <p className="mt-2 text-sm text-gray-400">Click to upload profile picture</p>
+                            <p className="mt-2 text-sm text-gray-500">Upload a new profile picture</p>
                         </div>
 
                         {/* Name Input */}
                         <div className="space-y-4">
-                            <div>
-                                <label 
-                                    htmlFor="fullName" 
-                                    className=" text-sm font-medium text-gray-300 mb-2 flex items-center"
+                            <div className="relative">
+                                <label
+                                    htmlFor="fullName"
+                                    className="text-sm font-medium text-gray-700 flex items-center gap-2 mb-1"
                                 >
-                                    <UserCircle className="mr-2 w-5 h-5 text-amber-400" />
+                                    <UserCircle className="w-4 h-4 text-teal-600" />
                                     Full Name
                                 </label>
-                                <div className="relative">
-                                    <input
-                                        required
-                                        type="text"
-                                        name="fullName"
-                                        id="fullName"
-                                        placeholder="Enter your full name"
-                                        className="w-full pl-10 pr-4 py-3 bg-gray-900/50 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all duration-300"
-                                        value={data.fullName}
-                                        onChange={handleInputChange}
-                                    />
-                                    <Upload 
-                                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5"
-                                    />
-                                </div>
+                                <input
+                                    required
+                                    type="text"
+                                    name="fullName"
+                                    id="fullName"
+                                    placeholder="Enter your full name"
+                                    className="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-gray-900 placeholder-gray-400 transition-all duration-200"
+                                    value={data.fullName}
+                                    onChange={handleInputChange}
+                                />
+                                <Upload
+                                    className="absolute left-3 top-1/2 transform translate-y-1 text-gray-400 w-5 h-5"
+                                />
                             </div>
 
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full flex items-center justify-center bg-gradient-to-r from-amber-500 to-purple-600 text-white py-3 rounded-lg hover:opacity-90 transition-all duration-300 ease-in-out transform hover:-translate-y-1 shadow-md hover:shadow-xl hover:shadow-amber-500/30"
+                                className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
                             >
-                                <Save className="mr-2 w-5 h-5" />
+                                <Save className="w-5 h-5" />
                                 Update Profile
                             </button>
                         </div>

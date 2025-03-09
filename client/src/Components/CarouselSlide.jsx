@@ -23,7 +23,7 @@ function CarouselSlide({ image, title, description, slideNumber, totalSlides }) 
           className="w-40 rounded-full border-2 border-gray-400"
           alt={title}
         />
-        <p className="text-xl text-gray-200">{description}</p>
+        <p className="text-xl text-gray-800">{description}</p>
         <h3 className="text-2xl font-semibold">{title}</h3>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
           <a
