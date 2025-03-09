@@ -182,16 +182,28 @@ export const getRazorpayApiKey = asyncHandler(async (_req, res, _next) => {
  * @ROUTE @GET {{URL}}/api/v1/payments
  * @ACCESS Private (ADMIN only)
  */
-export const allPayments = asyncHandler(async (req, res, _next) => {
+
+export const allPaymentsOfCurrentYear = asyncHandler(async (req, res, _next) => {
     const { count, skip } = req.query;
 
-    // Find all subscriptions from razorpay
-    const allPayments = await razorpay.subscriptions.all({
+    // Fetch up to 1000 subscriptions from Razorpay
+    const allSubscriptions = await razorpay.subscriptions.all({
         plan_id: process.env.RAZORPAY_PLAN_ID,
         count: count ? count : 10, // If count is sent then use that else default to 10
-        skip: skip ? skip : 23, // // If skip is sent then use that else default to 0
+        skip: skip ? skip : 0, // If skip is sent then use that else default to 0
     });
 
+    // Define the current year's start and end timestamps in seconds
+    const currentYear = new Date().getFullYear();
+    const startOfYear = Math.floor(new Date(currentYear, 0, 1).getTime() / 1000); // January 1st
+    const endOfYear = Math.floor(new Date(currentYear, 11, 31, 23, 59, 59).getTime() / 1000); // December 31st
+
+    // Filter subscriptions to those that started in the current year and are not cancelled
+    const currentYearSubscriptions = allSubscriptions.items.filter(
+        (sub) => sub.start_at >= startOfYear && sub.start_at <= endOfYear && sub.status !== "cancelled"
+    );
+
+    // Define month names for mapping
     const monthNames = [
         "January",
         "February",
@@ -207,6 +219,7 @@ export const allPayments = asyncHandler(async (req, res, _next) => {
         "December",
     ];
 
+    // Initialize monthly counts for all 12 months
     const finalMonths = {
         January: 0,
         February: 0,
@@ -222,29 +235,26 @@ export const allPayments = asyncHandler(async (req, res, _next) => {
         December: 0,
     };
 
-    const monthlyWisePayments = allPayments.items.map((payment) => {
-        // We are using payment.start_at which is in unix time, so we are converting it to Human readable format using Date()
-        const monthsInNumbers = new Date(payment.start_at * 1000);
-
-        return monthNames[monthsInNumbers.getMonth()];
+    // Calculate monthly counts based on filtered subscriptions
+    currentYearSubscriptions.forEach((payment) => {
+        const date = new Date(payment.start_at * 1000); // Convert Unix timestamp to Date object
+        const month = monthNames[date.getMonth()];
+        finalMonths[month] += 1;
     });
 
-    monthlyWisePayments.map((month) => {
-        Object.keys(finalMonths).forEach((objMonth) => {
-            if (month === objMonth) {
-                finalMonths[month] += 1;
-            }
-        });
-    });
+    // Convert monthly counts to an array for monthlySalesRecord
+    const monthlySalesRecord = Object.values(finalMonths);
 
-    const monthlySalesRecord = [];
-
-    Object.keys(finalMonths).forEach((monthName) => {
-        monthlySalesRecord.push(finalMonths[monthName]);
-    });
+    // Construct the allPayments object with filtered subscriptions
+    const allPayments = {
+        entity: allSubscriptions.entity,
+        count: currentYearSubscriptions.length,
+        items: currentYearSubscriptions,
+    };
+    // Send the response
     res.status(200).json({
         success: true,
-        message: "All payments",
+        message: "All payments for current year",
         allPayments,
         finalMonths,
         monthlySalesRecord,

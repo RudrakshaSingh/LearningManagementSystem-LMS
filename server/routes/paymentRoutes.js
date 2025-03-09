@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { authorizedRoles, authorizedSubscriber, isLoggedIn } from "../middlewares/authMiddleware.js";
 import {
-    allPayments,
+    allPaymentsOfCurrentYear,
     buySubscription,
     cancelSubscription,
     getRazorpayApiKey,
@@ -15,6 +15,6 @@ router.route("/razorpay-key").get(isLoggedIn, getRazorpayApiKey);
 router.route("/subscribe").post(isLoggedIn, buySubscription);
 router.route("/verify").post(isLoggedIn, verifySubscription);
 router.route("/unsubscribe").post(isLoggedIn, authorizedSubscriber, cancelSubscription);
-router.route("/").get(isLoggedIn, authorizedRoles("ADMIN"), allPayments);
+router.route("/").get(isLoggedIn, authorizedRoles("ADMIN"), allPaymentsOfCurrentYear);
 
 export default router;
