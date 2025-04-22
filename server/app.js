@@ -16,12 +16,20 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true })); //for params to parse encoded url
 
+// app.use(
+//     cors({
+//         origin: [process.env.FRONTEND_URL], //to use api in different user
+//         credentials: true, // to let cookie or credentials trvel through
+//     })
+// );
 app.use(
     cors({
-        origin: [process.env.FRONTEND_URL], //to use api in different user
-        credentials: true, // to let cookie or credentials trvel through
+      origin: FRONTEND_URL,         // Allow the frontend domain
+      credentials: true,            // Allow credentials (cookies, authorization headers)
+      methods: "GET,POST,PUT,DELETE", // Allow the necessary methods
+      allowedHeaders: "Content-Type,Authorization", // Allow these headers
     })
-);
+  );
 
 app.use(cookieParser()); //to let token in cookies parse
 
