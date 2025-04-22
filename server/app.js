@@ -16,17 +16,13 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true })); //for params to parse encoded url
 
-// app.use(
-//   cors({
-//     origin: process.env.FRONTEND_URL,
-//     credentials: true,
-//   })
-// );
-app.use(cors({
-    origin: '*',
-    credentials: true, // Note: credentials don't work with '*' origin, so this is just for testing
-  }));
-  
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
+
 app.use(cookieParser()); //to let token in cookies parse
 
 app.use(morgan("dev")); // dev level ki information console pe print karna
