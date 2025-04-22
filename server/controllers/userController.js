@@ -9,10 +9,12 @@ import User from "../models/userModel.js";
 import sendEmail from "../utilityFunctions/sendEmail.js"; //was wrong
 
 const cookieOptions = {
-    secure: process.env.NODE_ENV === "production" ? true : false,
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    secure: true,
     httpOnly: true,
-};
+    sameSite: "None",  // 👈 This is REQUIRED for cross-site cookies!
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  };
+  
 
 /**
  * @REGISTER

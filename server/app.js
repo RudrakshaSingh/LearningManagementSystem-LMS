@@ -22,14 +22,6 @@ app.use(
     credentials: true,
   })
 );
-// ✅ Handle preflight OPTIONS requests
-app.options(
-  "*",
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-  })
-);
 
 app.use(cookieParser()); //to let token in cookies parse
 
