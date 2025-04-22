@@ -22,14 +22,7 @@ app.use(express.urlencoded({ extended: true })); //for params to parse encoded u
 //         credentials: true, // to let cookie or credentials trvel through
 //     })
 // );
-app.use(
-    cors({
-      origin: FRONTEND_URL,         // Allow the frontend domain
-      credentials: true,            // Allow credentials (cookies, authorization headers)
-      methods: "GET,POST,PUT,DELETE", // Allow the necessary methods
-      allowedHeaders: "Content-Type,Authorization", // Allow these headers
-    })
-  );
+
 
 app.use(cookieParser()); //to let token in cookies parse
 
