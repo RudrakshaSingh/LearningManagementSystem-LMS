@@ -16,12 +16,12 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true })); //for params to parse encoded url
 
-// app.use(
-//     cors({
-//         origin: [process.env.FRONTEND_URL], //to use api in different user
-//         credentials: true, // to let cookie or credentials trvel through
-//     })
-// );
+app.use(
+    cors({
+        origin: [process.env.FRONTEND_URL], //to use api in different user
+        credentials: true, // to let cookie or credentials trvel through
+    })
+);
 
 
 app.use(cookieParser()); //to let token in cookies parse
